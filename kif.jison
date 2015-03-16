@@ -1,216 +1,118 @@
-/* Parses SUO-KIF into JavaScript */
+/* kif.jison - March 2015
+** Lexical Analysis and Parsing of SUO-KIF into JavaScript Objects
+** Copyright (C) Clark Feusier <cfeusier@gmail.com> - All Rights Reserved
+** Unauthorized copying of this file, via any medium is strictly prohibited
+*/
 
+
+/* ------------------------------------------ */
+/* BEGIN Lexical Scanner */
 %lex
+
+/* Lexicon Name Definitions */
+initialChar        [a-zA-Z]
+digit              [0-9]
+separator          [\-\_]
+anyChar            {initialChar}|{digit}|{separator}
+identifier         {initialChar}{anyChar}*
+
+/* Lexicon Options */
+%options flex
+
+/* Lexical Grammar */
 %%
-[A-Z]                               { return 'UPPER'; }
-[a-z]                               { return 'LOWER'; }
-[0-9]                               { return 'DIGIT'; }
-[\!\$\%\&\*\+\-\.\/\<\=\>\?\@\_\~]  { return 'SPECIAL'; }
-;;                                  { return 'COMMENT'; }
-\s+                                 { return 'WHITE'; }
-<<EOF>>                             { return 'EOF'; }
+\s+                 { /* ignore */ }
+{digit}             { return 'DIGIT'; }
+{identifier}        { return 'IDENTIFIER'; }
+"("                 { return 'LPAREN'; }
+")"                 { return 'RPAREN'; }
+"?"                 { return 'QUESTION'; }
+"@"                 { return 'MENTION'; }
+<<EOF>>             { return 'EOF'; }
+%%
+
 /lex
+/* END Lexical Scanner */
+/* ------------------------------------------ */
 
 
-/* operator associations and precedence */
-%left
-%right
+/* ------------------------------------------ */
+/* BEGIN Parser and Formal Grammar */
 
+/* Jison Start Symbol */
+%start KIF
 
-/* BNF Grammar */
+/* Formal KIF Grammar*/
 %%
-
-kif
-  : content EOF
-    { return new KIFNode($1); }
+KIF
+  : KIFexpressions EOF
+    { $$ = new KIFNode($KIFexpressions); return $$; }
   ;
 
-content
-  : content term
-    { $$ = $1.concat($2); }
+KIFexpressions
+  : KIFexpressions KIFexpression
+    { $$ = $KIFexpressions.concat($KIFexpression); }
   |
     { $$ = []; }
   ;
 
-term
-  : sentence
-  | funterm
-  | variable
-  | word
-  | string
-  | number
+KIFexpression
+  : Word
+  | Variable
+  | String
+  | FunctionTerm
+  | Number
+  | Sentence
   ;
 
-sentence
-  : word
-  | equation
-  | relsent
-  | logsent
-  | quantsent
-  | "?" word
-    { $$ = new Variable($2); }
+Word
+  : IDENTIFIER
+    { $$ = new WordNode($IDENTIFIER); }
   ;
 
-equation
-  : "(=" term term ")"
-    { $$ = new Equation($2, $3); }
+Variable
+  : QUESTION IDENTIFIER
+    { $$ = new VariableNode($IDENTIFIER, 'IND'); }
+  | MENTION IDENTIFIER
+    { $$ = new VariableNode($IDENTIFIER, 'ROW'); }
   ;
 
-relsent
-  : "(" relword argument+ ")"
-    { $$ = new RelSent($2, $3); }
+String
+  : DIGIT
   ;
 
-logsent
-  : "(" "not" sentence ")"
-    { $$ = new LogSent('negation', $3); }
-  | "(" "and" sentence+ ")"
-    { $$ = new LogSent('conjunction', $3); }
-  | "(" "or" sentence+ ")"
-    { $$ = new LogSent('disjunction', $3); }
-  | "(" "=>" sentence sentence ")"
-    { $$ = new LogSent('implication', $3, $4); }
-  | "(" "<=>" sentence sentence ")"
-    { $$ = new LogSent('equivalence', $3, $4); }
+FunctionTerm
+  : DIGIT
   ;
 
-quantsent
-  : "(" "forall" "(" variable+ ")" sentence ")"
-    { $$ = new QuantSent('universal', $4, $6); }
-  | "(" "exists" "(" variable+ ")" sentence ")"
-    { $$ = new QuantSent('existential', $4, $6); }
+Number
+  : DIGIT
   ;
 
-relword
-  : initialchar wordchar*
-    { $$ = new RelWord($1 + $2); }
-  | variable
-    { $$ = new RelWord($1); }
-  ;
-
-funword
-  : initialchar wordchar*
-    { $$ = new FunWord($1 + $2); }
-  ;
-
-argument
-  : sentence
-  | term
-  ;
-
-funterm
-  : "(" funword argument+ ")"
-    { $$ = new FunTerm($2 + $3); }
-  ;
-
-variable
-  : "?" word
-    { $$ = new Variable($2); }
-  | "@" word
-    { $$ = new RowVariable($2); }
-  ;
-
-word
-  : initialchar wordchar*
-    { $$ = new Word($1 + $2); }
-  ;
-
-string
-  : '"' character* '"'
-    { $$ = new StringLiteral($2); }
-  ;
-
-number
-  : [-] DIGIT+ [.DIGIT+] [exponent]
-    { $$ = new NumberLiteral($2, $1, $3, $4); }
-  ;
-
-exponent
-  : "e" [-] DIGIT+
-    { $$ = new ExponentLiteral($3, $2); }
-  ;
-
-wordchar
-  : UPPER
-  | LOWER
-  | DIGIT
-  | -
-  | _
-  ;
-
-initialchar
-  : UPPER
-  | LOWER
-  ;
-
-character
-  : UPPER
-  | LOWER
-  | DIGIT
-  | SPECIAL
-  | WHITE
+Sentence
+  : DIGIT
   ;
 
 %%
+/* END Parser and Formal Grammar */
+/* ------------------------------------------ */
 
-/* Nodes */
 
-function KIFNode(contentArray) {
-  this.type = "KIF";
-  this.content = contentArray;
+/* AST Representation Constructors */
+
+function KIFNode(kifExpressions) {
+  this.type = 'KIFNode';
+  this.expressions = this.expressions || [].concat(kifExpressions);
+  console.log(this);
 }
 
-function Variable(variableName) {
-  this.type = "Variable";
-  this.name = variableName;
+function WordNode(identifier) {
+  this.type = 'WordNode';
+  this.word = identifier;
 }
 
-function Equation(firstTerm, secondTerm) {
-  this.type = "Equation";
-  this.firstTerm = firstTerm;
-  this.secondTerm = secondTerm;
-}
-
-function RelSent() {
-
-}
-
-function LogSent() {
-
-}
-
-function QuantSent() {
-
-}
-
-function RelWord() {
-
-}
-
-function FunWord() {
-
-}
-
-function FunTerm() {
-
-}
-
-function RowVariable() {
-
-}
-
-function Word() {
-
-}
-
-function StringLiteral() {
-
-}
-
-function NumberLiteral() {
-
-}
-
-function ExponentLiteral() {
-
+function VariableNode(identifier, variableType) {
+  this.type = 'VariableNode';
+  this.variableType = variableType || 'IND';
+  this.variableName = identifier;
 }
