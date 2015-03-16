@@ -31,7 +31,7 @@ numericLiteral          {decimalDigits}("."{decimalDigits})?\b
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
-{numericLiteral}     { return 'NUMERICLITERAL'; }
+{numericLiteral}    { return 'NUMERICLITERAL'; }
 <<EOF>>             { return 'EOF'; }
 %%
 
