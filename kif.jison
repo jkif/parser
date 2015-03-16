@@ -10,13 +10,14 @@
 %lex
 
 /* Lexicon Name Definitions */
-initialChar        [a-zA-Z]
-digit              [0-9]
-separator          [\-\_]
-anyChar            {initialChar}|{digit}|{separator}
-identifier         {initialChar}{anyChar}*
-stringLiteral      (\"{anyChar}*\")|(\'{anyChar}*\')
-
+initialChar             [a-zA-Z]
+digit                   [0-9]
+decimalDigits           {digit}+
+separator               [\-\_]
+anyChar                 {initialChar}|{digit}|{separator}
+identifier              {initialChar}{anyChar}*
+stringLiteral           (\"{anyChar}*\")|(\'{anyChar}*\')
+numericLiteral          {decimalDigits}("."{decimalDigits})?\b
 
 /* Lexicon Options */
 %options flex
@@ -24,13 +25,13 @@ stringLiteral      (\"{anyChar}*\")|(\'{anyChar}*\')
 /* Lexical Grammar */
 %%
 \s+                 { /* ignore */ }
-{digit}             { return 'DIGIT'; }
 {identifier}        { return 'IDENTIFIER'; }
 "("                 { return 'LPAREN'; }
 ")"                 { return 'RPAREN'; }
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
+{numericLiteral}     { return 'NUMERICLITERAL'; }
 <<EOF>>             { return 'EOF'; }
 %%
 
@@ -86,15 +87,30 @@ String
   ;
 
 FunctionTerm
-  : DIGIT
+  : LPAREN Word ArgumentList RPAREN
+    { $$ = new FunctionTermNode($Word, $ArgumentList); }
+  ;
+
+ArgumentList
+  : ArgumentList Argument
+    { $$ = $ArgumentList.concat($Argument); }
+  |
+    {  $$ = []; }
+  ;
+
+Argument
+  : Sentence
+  | KIFexpression
   ;
 
 Number
-  : DIGIT
+  : NUMERICLITERAL
+    { $$ = new NumericLiteralNode($NUMERICLITERAL); }
   ;
 
 Sentence
-  : DIGIT
+  : Word
+    { $$ = new WordNode($Word); }
   ;
 
 %%
@@ -125,4 +141,15 @@ function StringLiteralNode(rawString) {
   this.type = 'StringLiteralNode';
   this.rawString = rawString;
   this.chars = rawString.substring(1, rawString.length - 1);
+}
+
+function FunctionTermNode(funcName, argsList) {
+  this.type = 'FunctionTermNode';
+  this.functionName = funcName;
+  this.functionArgumentList = this.functionArgumentList || [].concat(argsList);
+}
+
+function NumericLiteralNode(rawNumber) {
+  this.type = 'NumericLiteralNode';
+  this.number = rawNumber;
 }
