@@ -45,7 +45,7 @@ numericLiteral          {decimalDigits}("."{decimalDigits})?\b
 /* Jison Start Symbol */
 %start KIF
 
-/* Formal KIF Grammar*/
+/* Formal KIF Grammar */
 %%
 KIF
   : KIFexpressions EOF
