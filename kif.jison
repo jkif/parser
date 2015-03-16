@@ -121,8 +121,8 @@ Sentence
 
 function KIFNode(kifExpressions) {
   this.type = 'KIFNode';
-  this.expressions = this.expressions || [].concat(kifExpressions);
-  console.log(this);
+  this.expressions = this.expressions || [];
+  this.expressions = this.expressions.concat(kifExpressions);
 }
 
 function WordNode(identifier) {
@@ -145,7 +145,8 @@ function StringLiteralNode(rawString) {
 function FunctionTermNode(funcName, argsList) {
   this.type = 'FunctionTermNode';
   this.functionName = funcName;
-  this.functionArgumentList = this.functionArgumentList || [].concat(argsList);
+  this.functionArgumentList = this.functionArgumentList || [];
+  this.functionArgumentList = this.functionArgumentList.concat(argsList);
 }
 
 function NumericLiteralNode(rawNumber) {
