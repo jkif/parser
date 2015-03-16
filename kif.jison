@@ -1,7 +1,6 @@
 /* kif.jison - March 2015
 ** Lexical Analysis and Parsing of SUO-KIF into JavaScript Objects
 ** Copyright (C) Clark Feusier <cfeusier@gmail.com> - All Rights Reserved
-** Unauthorized copying of this file, via any medium is strictly prohibited
 */
 
 
