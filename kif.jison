@@ -13,9 +13,12 @@ initialChar             [a-zA-Z]
 digit                   [0-9]
 decimalDigits           {digit}+
 separator               [\-\_]
+special                 [!\$%&\*\+-\.\<=>\?@_~\\]
+white                   [\s+|(\r\n|\r|\n)+]
 anyChar                 {initialChar}|{digit}|{separator}
+freeChar                {anyChar}|{special}|{white}
 identifier              {initialChar}{anyChar}*
-stringLiteral           (\"{anyChar}*\")|(\'{anyChar}*\')
+stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
 numericLiteral          {decimalDigits}("."{decimalDigits})?\b
 
 /* Lexicon Options */
@@ -23,7 +26,7 @@ numericLiteral          {decimalDigits}("."{decimalDigits})?\b
 
 /* Lexical Grammar */
 %%
-\s+                 { /* ignore */ }
+{white}             { /* ignore */ }
 {identifier}        { return 'IDENTIFIER'; }
 "("                 { return 'LPAREN'; }
 ")"                 { return 'RPAREN'; }
