@@ -57,6 +57,12 @@ function DisjunctionNode(disjuncts) {
   this.disjuncts = this.disjuncts.concat(disjuncts);
 }
 
+function ConjunctionNode(conjuncts) {
+  this.type = 'ConjunctionNode';
+  this.conjuncts = this.conjuncts || [];
+  this.conjuncts = this.conjuncts.concat(conjuncts);
+}
+
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
@@ -67,5 +73,6 @@ module.exports = {
   EquationNode: EquationNode,
   RelSentNode: RelSentNode,
   NegationNode: NegationNode,
-  DisjunctionNode: DisjunctionNode
+  DisjunctionNode: DisjunctionNode,
+  ConjunctionNode: ConjunctionNode
 };
