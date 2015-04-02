@@ -20,6 +20,7 @@ anyChar                 {initialChar}|{digit}|{separator}
 special                 [#^!\$%&\*\+-\.\<=>\?@_~\\]
 freeChar                {anyChar}|{special}|{white}
 stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
+numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?\b
 identifier              {initialChar}{anyChar}*
 
 %options flex
@@ -32,6 +33,7 @@ identifier              {initialChar}{anyChar}*
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
+{numericLiteral}     { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
