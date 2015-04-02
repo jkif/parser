@@ -32,6 +32,7 @@ identifier              {initialChar}{anyChar}*
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
+">"                 { return 'RARROW'; }
 "not"|"NOT"         { return 'NOT'; }
 "or"|"OR"           { return 'OR'; }
 "and"|"AND"         { return 'AND'; }
@@ -122,6 +123,7 @@ LogicSent
   : Negation
   | Disjunction
   | Conjunction
+  | Implication
   ;
 
 Negation
@@ -137,5 +139,10 @@ Disjunction
 Conjunction
   : LPAREN AND ArgumentList RPAREN
     { $$ = new ast.ConjunctionNode($ArgumentList); }
+  ;
+
+Implication
+  : LPAREN EQUALS RARROW KIFexpression KIFexpression RPAREN
+    { $$ = new ast.ImplicationNode($KIFexpression1, $KIFexpression2); }
   ;
 %%

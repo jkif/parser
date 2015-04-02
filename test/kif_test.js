@@ -4,17 +4,11 @@ var chai = require('chai'),
     ast = require('../src/ast_constructors');
 
 describe('jKif', function() {
-  it('should be defined and not null', function() {
-    expect(jKif).to.exist;
-  });
-  it('should have a Parser property', function() {
-    expect(jKif.Parser).to.exist;
-  });
+  it('should be defined and not null', function() { expect(jKif).to.exist; });
+  it('should have a Parser property', function() { expect(jKif.Parser).to.exist; });
 
   describe('Parser', function() {
-    it('responds to #parse', function() {
-      expect(jKif.Parser).to.respondTo('parse');
-    });
+    it('responds to #parse', function() { expect(jKif.Parser).to.respondTo('parse'); });
 
     describe('#parse', function() {
       it('is a function', function() {
@@ -263,6 +257,12 @@ describe('jKif', function() {
         expect(parsed).to.be.an.instanceof(ast.ConjunctionNode);
         expect(parsed.conjuncts).to.have.length(2);
         expect(parsed.conjuncts[0]).to.be.instanceof(ast.WordNode);
+      });
+      it('correctly parses an implication into an ImplicationNode', function() {
+        var parsed = jKif.Parser.parse('(=> expr1 expr2)').expressions[0];
+        expect(parsed).to.be.an.instanceof(ast.ImplicationNode);
+        expect(parsed.antecedent).to.be.an.instanceof(ast.WordNode);
+        expect(parsed.consequent).to.be.instanceof(ast.WordNode);
       });
     });
   });
