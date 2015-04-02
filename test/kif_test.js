@@ -252,6 +252,10 @@ describe('jKif', function() {
       xit('correctly parses a negated equivalence', function() {
 
       });
+      it('correctly parses a disjunction into a DisjunctionNode', function() {
+        var parsed = jKif.Parser.parse('(or arg1 arg2)').expressions[0];
+        expect(parsed).to.be.an.instanceof(ast.DisjunctionNode);
+      });
     });
   });
 });

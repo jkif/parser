@@ -33,6 +33,7 @@ identifier              {initialChar}{anyChar}*
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
 "not"|"NOT"         { return 'NOT'; }
+"or"|"OR"           { return 'OR'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
 {numericLiteral}    { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
@@ -117,7 +118,17 @@ RelSent
   ;
 
 LogicSent
+  : Negation
+  | Disjunction
+  ;
+
+Negation
   : LPAREN NOT KIFexpression RPAREN
     { $$ = new ast.NegationNode($KIFexpression); }
+  ;
+
+Disjunction
+  : LPAREN OR ArgumentList RPAREN
+    { $$ = new ast.DisjunctionNode($ArgumentList); }
   ;
 %%

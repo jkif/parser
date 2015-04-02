@@ -51,6 +51,11 @@ function NegationNode(negatedExpression) {
   this.negatedExpression = negatedExpression;
 }
 
+function DisjunctionNode(disjuncts) {
+  this.type = 'DisjunctionNode';
+  this.disjuncts = this.disjuncts || [];
+  this.disjuncts = this.disjuncts.concat(disjuncts);
+}
 
 module.exports = {
   KIFNode: KIFNode,
@@ -61,5 +66,6 @@ module.exports = {
   FunctionTermNode: FunctionTermNode,
   EquationNode: EquationNode,
   RelSentNode: RelSentNode,
-  NegationNode: NegationNode
+  NegationNode: NegationNode,
+  DisjunctionNode: DisjunctionNode
 };
