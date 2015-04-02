@@ -10,6 +10,7 @@
   var KIFNode = ast.KIFNode;
   var WordNode = ast.WordNode;
   var VariableNode = ast.VariableNode;
+  var FunctionTermNode = ast.FunctionTermNode;
 %}
 
 %lex
@@ -42,7 +43,7 @@ identifier              {initialChar}{anyChar}*
 %%
 KIF
   : KIFexpressions EOF
-    { $$ = new KIFNode($KIFexpressions); return $$; }
+    { $$ = new KIFNode($KIFexpressions); console.log($$); return $$; }
   ;
 
 KIFexpressions
@@ -55,6 +56,7 @@ KIFexpressions
 KIFexpression
   : Word
   | Variable
+  | FunctionTerm
   ;
 
 Word
@@ -68,4 +70,21 @@ Variable
   | MENTION IDENTIFIER
     { $$ = new VariableNode($IDENTIFIER, 'ROW'); }
   ;
+
+FunctionTerm
+  : LPAREN Word ArgumentList RPAREN
+    { $$ = new FunctionTermNode($Word.word, $ArgumentList); }
+  ;
+
+ArgumentList
+  : ArgumentList Argument
+    { $$ = $ArgumentList.concat($Argument); }
+  |
+    {  $$ = []; }
+  ;
+
+Argument
+  : KIFexpression
+  ;
+
 %%
