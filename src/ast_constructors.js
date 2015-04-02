@@ -34,11 +34,18 @@ function StringLiteralNode(rawString) {
   this.chars = rawString.substring(1, rawString.length - 1);
 }
 
+function NumericLiteralNode(rawNumber) {
+  this.type = 'NumericLiteralNode';
+  this.number = +rawNumber;
+}
+
+
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
   VariableNode: VariableNode,
   StringLiteralNode: StringLiteralNode,
+  NumericLiteralNode: NumericLiteralNode,
   FunctionTermNode: FunctionTermNode,
   EquationNode: EquationNode
 };

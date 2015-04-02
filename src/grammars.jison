@@ -7,12 +7,6 @@
 %{
   var path = require('path');
   var ast = require(path.resolve(__dirname + './../../../src/ast_constructors'));
-  var KIFNode = ast.KIFNode;
-  var WordNode = ast.WordNode;
-  var VariableNode = ast.VariableNode;
-  var StringLiteralNode = ast.StringLiteralNode;
-  var FunctionTermNode = ast.FunctionTermNode;
-  var EquationNode = ast.EquationNode;
 %}
 
 %lex
@@ -26,6 +20,7 @@ anyChar                 {initialChar}|{digit}|{separator}
 special                 [#^!\$%&\*\+-\.\<=>\?@_~\\]
 freeChar                {anyChar}|{special}|{white}
 stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
+numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?\b
 identifier              {initialChar}{anyChar}*
 
 %options flex
@@ -38,6 +33,7 @@ identifier              {initialChar}{anyChar}*
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
+{numericLiteral}     { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
@@ -50,7 +46,7 @@ identifier              {initialChar}{anyChar}*
 %%
 KIF
   : KIFexpressions EOF
-    { $$ = new KIFNode($KIFexpressions); console.log($$); return $$; }
+    { $$ = new ast.KIFNode($KIFexpressions); return $$; }
   ;
 
 KIFexpressions
@@ -64,30 +60,36 @@ KIFexpression
   : Word
   | Variable
   | String
+  | Number
   | FunctionTerm
   | Sentence
   ;
 
 Word
   : IDENTIFIER
-    { $$ = new WordNode($IDENTIFIER); }
+    { $$ = new ast.WordNode($IDENTIFIER); }
   ;
 
 Variable
   : QUESTION IDENTIFIER
-    { $$ = new VariableNode($IDENTIFIER, 'IND'); }
+    { $$ = new ast.VariableNode($IDENTIFIER, 'IND'); }
   | MENTION IDENTIFIER
-    { $$ = new VariableNode($IDENTIFIER, 'ROW'); }
+    { $$ = new ast.VariableNode($IDENTIFIER, 'ROW'); }
   ;
 
 String
   : STRINGLITERAL
-    { $$ = new StringLiteralNode($STRINGLITERAL); }
+    { $$ = new ast.StringLiteralNode($STRINGLITERAL); }
+  ;
+
+Number
+  : NUMERICLITERAL
+    { $$ = new ast.NumericLiteralNode($NUMERICLITERAL); }
   ;
 
 FunctionTerm
   : LPAREN Word ArgumentList RPAREN
-    { $$ = new FunctionTermNode($Word.word, $ArgumentList); }
+    { $$ = new ast.FunctionTermNode($Word.word, $ArgumentList); }
   ;
 
 ArgumentList
@@ -103,6 +105,6 @@ Sentence
 
 Equation
   : LPAREN EQUALS KIFexpression KIFexpression RPAREN
-    { $$ = new EquationNode($KIFexpression1, $KIFexpression2); }
+    { $$ = new ast.EquationNode($KIFexpression1, $KIFexpression2); }
   ;
 %%
