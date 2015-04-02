@@ -133,6 +133,16 @@ describe('jKif', function() {
         expect(parsed.terms[1].terms[0].word).to.equal('secondFirstTerm');
         expect(parsed.terms[1].terms[1].word).to.equal('firstSecondTerm');
       });
+      it('correctly parses a StringLiteral into a StringLiteralNode', function() {
+        expect(jKif.Parser.parse('""').expressions[0]).to.be.instanceof(ast.StringLiteralNode);
+        expect(jKif.Parser.parse('\'\'').expressions[0]).to.be.instanceof(ast.StringLiteralNode);
+      });
+      it('correctly parses a StringLiteral with special characters', function() {
+        expect(jKif.Parser.parse('"!$_-@~^#%+=\\"').expressions[0]).to.be.instanceof(ast.StringLiteralNode);
+      });
+      it('correctly parses a StringLiteral with new lines', function() {
+        expect(jKif.Parser.parse('"\n"').expressions[0]).to.be.instanceof(ast.StringLiteralNode);
+      });
     });
   });
 });

@@ -10,6 +10,7 @@
   var KIFNode = ast.KIFNode;
   var WordNode = ast.WordNode;
   var VariableNode = ast.VariableNode;
+  var StringLiteralNode = ast.StringLiteralNode;
   var FunctionTermNode = ast.FunctionTermNode;
   var EquationNode = ast.EquationNode;
 %}
@@ -22,6 +23,9 @@ digit                   [0-9]
 decimalDigits           {digit}+
 separator               [\-\_]
 anyChar                 {initialChar}|{digit}|{separator}
+special                 [#^!\$%&\*\+-\.\<=>\?@_~\\]
+freeChar                {anyChar}|{special}|{white}
+stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
 identifier              {initialChar}{anyChar}*
 
 %options flex
@@ -33,6 +37,7 @@ identifier              {initialChar}{anyChar}*
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
+{stringLiteral}     { return 'STRINGLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
@@ -58,6 +63,7 @@ KIFexpressions
 KIFexpression
   : Word
   | Variable
+  | String
   | FunctionTerm
   | Sentence
   ;
@@ -72,6 +78,11 @@ Variable
     { $$ = new VariableNode($IDENTIFIER, 'IND'); }
   | MENTION IDENTIFIER
     { $$ = new VariableNode($IDENTIFIER, 'ROW'); }
+  ;
+
+String
+  : STRINGLITERAL
+    { $$ = new StringLiteralNode($STRINGLITERAL); }
   ;
 
 FunctionTerm
