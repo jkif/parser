@@ -63,6 +63,13 @@ function ConjunctionNode(conjuncts) {
   this.conjuncts = this.conjuncts.concat(conjuncts);
 }
 
+function ImplicationNode(antecedent, consequent) {
+  this.type = 'ImplicationNode';
+  this.antecedent = antecedent;
+  this.consequent = consequent;
+}
+
+
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
@@ -74,5 +81,6 @@ module.exports = {
   RelSentNode: RelSentNode,
   NegationNode: NegationNode,
   DisjunctionNode: DisjunctionNode,
-  ConjunctionNode: ConjunctionNode
+  ConjunctionNode: ConjunctionNode,
+  ImplicationNode: ImplicationNode
 };
