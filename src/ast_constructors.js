@@ -28,10 +28,17 @@ function EquationNode(firstTerm, secondTerm) {
   this.terms = this.terms.concat(firstTerm, secondTerm);
 }
 
+function StringLiteralNode(rawString) {
+  this.type = 'StringLiteralNode';
+  this.rawString = rawString;
+  this.chars = rawString.substring(1, rawString.length - 1);
+}
+
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
   VariableNode: VariableNode,
+  StringLiteralNode: StringLiteralNode,
   FunctionTermNode: FunctionTermNode,
   EquationNode: EquationNode
 };
