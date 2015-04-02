@@ -46,6 +46,16 @@ function RelSentNode(variable, args) {
   this.argumentList = this.argumentList.concat(args);
 }
 
+function NegationNode(negatedExpression) {
+  this.type = 'NegationNode';
+  this.negatedExpression = negatedExpression;
+}
+
+function DisjunctionNode(disjuncts) {
+  this.type = 'DisjunctionNode';
+  this.disjuncts = this.disjuncts || [];
+  this.disjuncts = this.disjuncts.concat(disjuncts);
+}
 
 module.exports = {
   KIFNode: KIFNode,
@@ -55,5 +65,7 @@ module.exports = {
   NumericLiteralNode: NumericLiteralNode,
   FunctionTermNode: FunctionTermNode,
   EquationNode: EquationNode,
-  RelSentNode: RelSentNode
+  RelSentNode: RelSentNode,
+  NegationNode: NegationNode,
+  DisjunctionNode: DisjunctionNode
 };
