@@ -32,8 +32,9 @@ identifier              {initialChar}{anyChar}*
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
+"not"|"NOT"         { return 'NOT'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
-{numericLiteral}     { return 'NUMERICLITERAL'; }
+{numericLiteral}    { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
@@ -102,6 +103,7 @@ ArgumentList
 Sentence
   : Equation
   | RelSent
+  | LogicSent
   ;
 
 Equation
@@ -112,5 +114,10 @@ Equation
 RelSent
   : LPAREN Variable ArgumentList RPAREN
     { $$ = new ast.RelSentNode($Variable, $ArgumentList); }
+  ;
+
+LogicSent
+  : LPAREN NOT KIFexpression RPAREN
+    { $$ = new ast.NegationNode($KIFexpression); }
   ;
 %%
