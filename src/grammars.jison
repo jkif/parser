@@ -101,10 +101,16 @@ ArgumentList
 
 Sentence
   : Equation
+  | RelSent
   ;
 
 Equation
   : LPAREN EQUALS KIFexpression KIFexpression RPAREN
     { $$ = new ast.EquationNode($KIFexpression1, $KIFexpression2); }
+  ;
+
+RelSent
+  : LPAREN Variable ArgumentList RPAREN
+    { $$ = new ast.RelSentNode($Variable, $ArgumentList); }
   ;
 %%
