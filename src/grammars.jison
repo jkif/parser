@@ -1,4 +1,4 @@
-/* jKif - March 2015
+/* jKif - 2015
 ** Lexical Analysis and Parsing of SUO-KIF into JavaScript Objects
 ** Copyright (C) Clark Feusier <cfeusier@gmail.com> - All Rights Reserved
 */
@@ -34,6 +34,7 @@ identifier              {initialChar}{anyChar}*
 "="                 { return 'EQUALS'; }
 "not"|"NOT"         { return 'NOT'; }
 "or"|"OR"           { return 'OR'; }
+"and"|"AND"         { return 'AND'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
 {numericLiteral}    { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
@@ -120,6 +121,7 @@ RelSent
 LogicSent
   : Negation
   | Disjunction
+  | Conjunction
   ;
 
 Negation
@@ -130,5 +132,10 @@ Negation
 Disjunction
   : LPAREN OR ArgumentList RPAREN
     { $$ = new ast.DisjunctionNode($ArgumentList); }
+  ;
+
+Conjunction
+  : LPAREN AND ArgumentList RPAREN
+    { $$ = new ast.ConjunctionNode($ArgumentList); }
   ;
 %%
