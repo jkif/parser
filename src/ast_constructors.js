@@ -15,8 +15,17 @@ function VariableNode(identifier, variableType) {
   this.variableName = identifier;
 }
 
+function FunctionTermNode(funcName, argsList) {
+  this.type = 'FunctionTermNode';
+  this.functionName = funcName;
+  this.functionArgumentList = this.functionArgumentList || [];
+  this.functionArgumentList = this.functionArgumentList.concat(argsList);
+}
+
+
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
-  VariableNode: VariableNode
+  VariableNode: VariableNode,
+  FunctionTermNode: FunctionTermNode
 };
