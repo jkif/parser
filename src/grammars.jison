@@ -6,8 +6,10 @@
 
 %{
   var path = require('path');
-  var astConstructors = require(path.resolve(__dirname + './../../../src/ast_constructors'));
-  var KIFNode = astConstructors.KIFNode;
+  var ast = require(path.resolve(__dirname + './../../../src/ast_constructors'));
+  var KIFNode = ast.KIFNode;
+  var WordNode = ast.WordNode;
+  var VariableNode = ast.VariableNode;
 %}
 
 %lex
@@ -26,6 +28,8 @@ identifier              {initialChar}{anyChar}*
 {white}             { /* ignore */ }
 "("                 { return 'LPAREN'; }
 ")"                 { return 'RPAREN'; }
+"?"                 { return 'QUESTION'; }
+"@"                 { return 'MENTION'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
@@ -50,10 +54,18 @@ KIFexpressions
 
 KIFexpression
   : Word
+  | Variable
   ;
 
 Word
   : IDENTIFIER
-    { $$ = $IDENTIFIER; }
+    { $$ = new WordNode($IDENTIFIER); }
+  ;
+
+Variable
+  : QUESTION IDENTIFIER
+    { $$ = new VariableNode($IDENTIFIER, 'IND'); }
+  | MENTION IDENTIFIER
+    { $$ = new VariableNode($IDENTIFIER, 'ROW'); }
   ;
 %%
