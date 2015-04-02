@@ -11,6 +11,7 @@
   var WordNode = ast.WordNode;
   var VariableNode = ast.VariableNode;
   var FunctionTermNode = ast.FunctionTermNode;
+  var EquationNode = ast.EquationNode;
 %}
 
 %lex
@@ -31,6 +32,7 @@ identifier              {initialChar}{anyChar}*
 ")"                 { return 'RPAREN'; }
 "?"                 { return 'QUESTION'; }
 "@"                 { return 'MENTION'; }
+"="                 { return 'EQUALS'; }
 {identifier}        { return 'IDENTIFIER'; }
 <<EOF>>             { return 'EOF'; }
 %%
@@ -57,6 +59,7 @@ KIFexpression
   : Word
   | Variable
   | FunctionTerm
+  | Sentence
   ;
 
 Word
@@ -77,14 +80,18 @@ FunctionTerm
   ;
 
 ArgumentList
-  : ArgumentList Argument
-    { $$ = $ArgumentList.concat($Argument); }
+  : ArgumentList KIFexpression
+    { $$ = $ArgumentList.concat($KIFexpression); }
   |
     {  $$ = []; }
   ;
 
-Argument
-  : KIFexpression
+Sentence
+  : Equation
   ;
 
+Equation
+  : LPAREN EQUALS KIFexpression KIFexpression RPAREN
+    { $$ = new EquationNode($KIFexpression1, $KIFexpression2); }
+  ;
 %%

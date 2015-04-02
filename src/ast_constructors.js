@@ -22,10 +22,16 @@ function FunctionTermNode(funcName, argsList) {
   this.functionArgumentList = this.functionArgumentList.concat(argsList);
 }
 
+function EquationNode(firstTerm, secondTerm) {
+  this.type = 'EquationNode';
+  this.terms = this.terms || [];
+  this.terms = this.terms.concat(firstTerm, secondTerm);
+}
 
 module.exports = {
   KIFNode: KIFNode,
   WordNode: WordNode,
   VariableNode: VariableNode,
-  FunctionTermNode: FunctionTermNode
+  FunctionTermNode: FunctionTermNode,
+  EquationNode: EquationNode
 };
