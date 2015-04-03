@@ -272,6 +272,14 @@ describe('jKif', function() {
         expect(parsed.expressions[0]).to.be.an.instanceof(ast.WordNode);
         expect(parsed.expressions[1]).to.be.an.instanceof(ast.WordNode);
       });
+      it('correctly parses a universally-quantified sentence into a UniversalSentNode', function() {
+        var parsed = jKif.Parser.parse('(forall (?variable) expr)').expressions[0];
+        expect(parsed).to.be.an.instanceof(ast.UniversalSentNode);
+        expect(parsed.variableList).to.be.an.instanceof(Array);
+        expect(parsed.variableList).to.have.length(1);
+        expect(parsed.variableList[0]).to.be.an.instanceof(ast.VariableNode);
+        expect(parsed.quantifiedSent).to.be.an.instanceof(ast.WordNode);
+      });
     });
   });
 });

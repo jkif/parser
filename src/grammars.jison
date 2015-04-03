@@ -38,6 +38,7 @@ identifier              {initialChar}{anyChar}*
 "not"|"NOT"         { return 'NOT'; }
 "or"|"OR"           { return 'OR'; }
 "and"|"AND"         { return 'AND'; }
+"forall"|"FORALL"   { return 'FORALL'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
 {numericLiteral}    { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
@@ -105,6 +106,13 @@ ArgumentList
     {  $$ = []; }
   ;
 
+VariableList
+  : VariableList Variable
+    { $$ = $VariableList.concat($Variable); }
+  | Variable
+    { $$ = [$Variable]; }
+  ;
+
 Sentence
   : Equation
   | RelSent
@@ -131,8 +139,8 @@ LogicSent
   ;
 
 QuantSent
-  : ExistentialSent
-  | UniversalSent
+  : UniversalSent
+  | ExistentialSent
   ;
 
 Negation
@@ -158,5 +166,10 @@ Implication
 Equivalence
   : LPAREN LARROW EQUALS RARROW KIFexpression KIFexpression RPAREN
     { $$ = new ast.EquivalenceNode($KIFexpression1, $KIFexpression2); }
+  ;
+
+UniversalSent
+  : LPAREN FORALL LPAREN VariableList RPAREN KIFexpression RPAREN
+    { $$ = new ast.UniversalSentNode($VariableList, $KIFexpression); }
   ;
 %%
