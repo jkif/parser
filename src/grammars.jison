@@ -109,6 +109,7 @@ Sentence
   : Equation
   | RelSent
   | LogicSent
+  | QuantSent
   ;
 
 Equation
@@ -127,6 +128,11 @@ LogicSent
   | Conjunction
   | Implication
   | Equivalence
+  ;
+
+QuantSent
+  : ExistentialSent
+  | UniversalSent
   ;
 
 Negation
