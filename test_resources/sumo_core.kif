@@ -1,0 +1,73 @@
+(exists (?F ?T)
+ (and
+   (instance ?F Farmer)
+   (instance ?T Tractor)
+   (likes ?F ?T)))
+
+(<=>
+  (instance ?CLASS Class)
+  (subclass ?CLASS Entity))
+
+(exists (?THING)
+  (instance ?THING Entity))
+(forall (?THING)
+  (instance ?THING Entity))
+
+(=>
+  (disjointDecomposition @ROW)
+  (=>
+    (inList ?ELEMENT
+      (ListFn @ROW))
+    (instance ?ELEMENT Class)))
+
+(=>
+  (exhaustiveDecomposition @ROW)
+  (=>
+    (inList ?ELEMENT
+      (ListFn @ROW))
+    (instance ?ELEMENT Class)))
+
+(<=>
+  (instance ?REL TotalValuedRelation)
+  (exists (?VALENCE)
+    (and
+      (instance ?REL Relation)
+      (valence ?REL ?VALENCE)
+      (=>
+        (forall (?NUMBER ?ELEMENT ?CLASS)
+          (=>
+            (and
+              (lessThan ?NUMBER ?VALENCE)
+              (domain ?REL ?NUMBER ?CLASS)
+              (equal ?ELEMENT
+                (ListOrderFn
+                  (ListFn @ROW) ?NUMBER)))
+            (instance ?ELEMENT ?CLASS)))
+        (exists (?ITEM)
+          (?REL @ROW ?ITEM))))))
+
+(<=>
+  (instance ?ABS Abstract)
+  (not
+    (exists (?POINT)
+    (or
+      (located ?ABS ?POINT)
+      (time ?ABS ?POINT)))))
+
+(=>
+  (and
+    (playsRoleInEvent ?OBJ ?ROLE ?EVENT)
+    (instance ?EVENT ?TYPE)
+    (subclass ?TYPE Process)
+    (time ?EVENT ?TIME)
+    (eventLocated ?EVENT ?PLACE))
+  (playsRoleInEventOfType ?OBJ ?ROLE ?TYPE ?TIME ?PLACE))
+
+(=>
+  (and
+    (playsRoleInEvent ?OBJ ?ROLE ?EVENT)
+    (instance ?EVENT ?CLASS)
+    (subclass ?CLASS Process)
+    (time ?EVENT ?TIME)
+    (eventLocated ?EVENT ?PLACE))
+  (playsRoleInEventOfType ?OBJ ?ROLE ?CLASS ?TIME ?PLACE))
