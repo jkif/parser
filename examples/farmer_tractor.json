@@ -1,0 +1,71 @@
+{
+  "type": "KIFNode",
+  "expressions": [
+    {
+      "type": "ExistentialSentNode",
+      "variableList": [
+        {
+          "type": "VariableNode",
+          "variableType": "IND",
+          "variableName": "F"
+        },
+        {
+          "type": "VariableNode",
+          "variableType": "IND",
+          "variableName": "T"
+        }
+      ],
+      "quantifiedSent": {
+        "type": "ConjunctionNode",
+        "conjuncts": [
+          {
+            "type": "FunctionTermNode",
+            "functionName": "instance",
+            "functionArgumentList": [
+              {
+                "type": "VariableNode",
+                "variableType": "IND",
+                "variableName": "F"
+              },
+              {
+                "type": "WordNode",
+                "word": "Farmer"
+              }
+            ]
+          },
+          {
+            "type": "FunctionTermNode",
+            "functionName": "instance",
+            "functionArgumentList": [
+              {
+                "type": "VariableNode",
+                "variableType": "IND",
+                "variableName": "T"
+              },
+              {
+                "type": "WordNode",
+                "word": "Tractor"
+              }
+            ]
+          },
+          {
+            "type": "FunctionTermNode",
+            "functionName": "likes",
+            "functionArgumentList": [
+              {
+                "type": "VariableNode",
+                "variableType": "IND",
+                "variableName": "F"
+              },
+              {
+                "type": "VariableNode",
+                "variableType": "IND",
+                "variableName": "T"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
