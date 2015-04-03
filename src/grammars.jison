@@ -34,6 +34,7 @@ identifier              {initialChar}{anyChar}*
 "@"                 { return 'MENTION'; }
 "="                 { return 'EQUALS'; }
 ">"                 { return 'RARROW'; }
+"<"                 { return 'LARROW'; }
 "not"|"NOT"         { return 'NOT'; }
 "or"|"OR"           { return 'OR'; }
 "and"|"AND"         { return 'AND'; }
@@ -125,6 +126,7 @@ LogicSent
   | Disjunction
   | Conjunction
   | Implication
+  | Equivalence
   ;
 
 Negation
@@ -145,5 +147,10 @@ Conjunction
 Implication
   : LPAREN EQUALS RARROW KIFexpression KIFexpression RPAREN
     { $$ = new ast.ImplicationNode($KIFexpression1, $KIFexpression2); }
+  ;
+
+Equivalence
+  : LPAREN LARROW EQUALS RARROW KIFexpression KIFexpression RPAREN
+    { $$ = new ast.EquivalenceNode($KIFexpression1, $KIFexpression2); }
   ;
 %%

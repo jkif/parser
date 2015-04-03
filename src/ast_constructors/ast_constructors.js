@@ -10,5 +10,6 @@ module.exports = {
   NegationNode: require('./negationnode'),
   DisjunctionNode: require('./disjunctionnode'),
   ConjunctionNode: require('./conjunctionnode'),
-  ImplicationNode: require('./implicationnode')
+  ImplicationNode: require('./implicationnode'),
+  EquivalenceNode: require('./equivalencenode')
 };
