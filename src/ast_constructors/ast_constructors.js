@@ -11,5 +11,6 @@ module.exports = {
   DisjunctionNode: require('./disjunctionnode'),
   ConjunctionNode: require('./conjunctionnode'),
   ImplicationNode: require('./implicationnode'),
-  EquivalenceNode: require('./equivalencenode')
+  EquivalenceNode: require('./equivalencenode'),
+  UniversalSentNode: require('./universalsentnode')
 };
