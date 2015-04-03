@@ -1,0 +1,5 @@
+(exists (?F ?T)
+ (and
+   (instance ?F Farmer)
+   (instance ?T Tractor)
+   (likes ?F ?T)))
