@@ -6,8 +6,8 @@
 
 %{
   var path = require('path');
-  var ast = require(path.resolve(
-                    __dirname + './../../../src/ast_constructors/ast_constructors'));
+  var ast = require(path.resolve(__dirname +
+                                './../../../src/ast_constructors/ast_constructors'));
 %}
 
 %lex
@@ -39,6 +39,7 @@ identifier              {initialChar}{anyChar}*
 "or"|"OR"           { return 'OR'; }
 "and"|"AND"         { return 'AND'; }
 "forall"|"FORALL"   { return 'FORALL'; }
+"exists"|"EXISTS"   { return 'EXISTS'; }
 {stringLiteral}     { return 'STRINGLITERAL'; }
 {numericLiteral}    { return 'NUMERICLITERAL'; }
 {identifier}        { return 'IDENTIFIER'; }
@@ -171,5 +172,10 @@ Equivalence
 UniversalSent
   : LPAREN FORALL LPAREN VariableList RPAREN KIFexpression RPAREN
     { $$ = new ast.UniversalSentNode($VariableList, $KIFexpression); }
+  ;
+
+ExistentialSent
+  :  LPAREN EXISTS LPAREN VariableList RPAREN KIFexpression RPAREN
+    { $$ = new ast.ExistentialSentNode($VariableList, $KIFexpression); }
   ;
 %%
