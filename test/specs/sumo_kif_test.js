@@ -2,10 +2,10 @@ var chai = require('chai'),
     expect = chai.expect,
     fs = require('fs'),
     path = require('path'),
-    jKif = require('../src/jkif'),
-    ast = require('../src/ast_constructors/ast_constructors'),
+    jKif = require('../../src/jkif'),
+    ast = require('../../src/ast_constructors/ast_constructors'),
     kifFile = fs.readFileSync(path.resolve(__dirname +
-                                          './../test_resources/sumo_core.kif'), 'utf8'),
+                                          './../resources/sumo_core.kif'), 'utf8'),
     parsed = jKif.Parser.parse(kifFile);
 
 describe('jKif Full KIF File Parser', function() {
