@@ -12,16 +12,20 @@ jKifParser.parseFile = function(filePath, cb) {
 };
 
 
-jKifParser.writeParsedToFile = function(parsed, filePath, encoding) {
-  if (encoding === 'json' || !encoding) {
-    fsJson.writeFile(filePath, parsed, function(err) {
-      return err ? false : true;
-    });
-  } else {
-    fs.writeFile(filePath, parsed, { encoding: encoding }, function(err) {
-      return err ? false : true;
-    });
-  }
+jKifParser.parseFileP = function() {
+
+};
+
+
+jKifParser.writeParsedToFileP = function() {
+
+};
+
+
+jKifParser.writeParsedToFile = function(filePath, parsed, cb) {
+  fsJson.writeFile(filePath, parsed, function(err) {
+    err ? cb(false) : cb(true);
+  });
 };
 
 
