@@ -17,6 +17,10 @@ jKifParser.writeParsedToFile = function(parsed, filePath, encoding) {
     fsJson.writeFile(filePath, parsed, function(err) {
       return err ? false : true;
     });
+  } else {
+    fs.writeFile(filePath, parsed, { encoding: encoding }, function(err) {
+      return err ? false : true;
+    });
   }
 };
 
