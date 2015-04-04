@@ -1,7 +1,6 @@
-var fs = require('fs'),
-    Parser = require('jison').Parser,
-    grammars = fs.readFileSync(__dirname + '/grammars.jison', 'utf8'),
-    jKifParser = new Parser(grammars),
-    jKif = { Parser: jKifParser };
+var jKif = {
+  Parser: require('./jkif_parser'),
+  API: require('./jkif_api')
+};
 
 module.exports = jKif;
