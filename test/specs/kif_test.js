@@ -1,7 +1,7 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../src/jkif'),
-    ast = require('../src/ast_constructors/ast_constructors');
+    jKif = require('../../src/jkif'),
+    ast = require('../../src/ast_constructors/ast_constructors');
 
 describe('jKif', function() {
   it('should be defined and not null', function() { expect(jKif).to.exist; });

@@ -2,7 +2,7 @@
   "name": "jkif",
   "version": "0.0.1",
   "scripts": {
-    "test": "for f in test/*; do echo \"$f\"; mocha \"$f\"; done; exit 0"
+    "test": "for f in test/specs/*; do echo \"$f\"; mocha \"$f\"; done; exit 0"
   },
   "devDependencies": {
     "chai": "^2.2.0",
