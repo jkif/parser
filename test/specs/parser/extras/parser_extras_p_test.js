@@ -5,7 +5,7 @@ var chai = require('chai'),
     path = require('path'),
     jKif = require('../../../../src/jkif'),
     ast = require('../../../../src/ast_constructors/ast_constructors'),
-    testResourcesPath = path.resolve(__dirname + '../../../resources/'),
+    testResourcesPath = path.resolve(__dirname + '../../../../resources/'),
     kifFilePath = path.resolve(testResourcesPath + '/sumo_core.kif'),
     jsonTestOutputPath = path.resolve(testResourcesPath + '/test_output.json');
 
