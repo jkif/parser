@@ -9,10 +9,25 @@ describe('FunctionTermNode AST Constructor', function() {
     expect(ast.FunctionTermNode).to.exist;
   });
 
-  var fNode = new ast.FunctionTermNode('testFunc');
+  var locData = {
+    first_line: 11,
+    last_line: 12,
+    first_column: 0,
+    last_column: 27
+  };
+
+  var fNode = new ast.FunctionTermNode(locData, 'testFunc');
 
   it('should have a "type" property set to "FunctionTermNode"', function() {
     expect(fNode.type).to.equal('FunctionTermNode');
+  });
+
+  it('should have a "locationData" property', function() {
+    expect(fNode.locationData).to.exist;
+  });
+
+  it('should have a "locationData" property that is an instance of Object', function() {
+    expect(fNode.locationData).to.be.an.instanceof(Object);
   });
 
   it('should have a "functionName" property that is a String', function() {

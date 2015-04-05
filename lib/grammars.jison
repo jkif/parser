@@ -24,7 +24,7 @@ stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
 numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?\b
 identifier              {initialChar}{anyChar}*
 
-%options flex
+%options flex yylineno
 
 %%
 {white}             { /* ignore */ }
@@ -54,7 +54,7 @@ identifier              {initialChar}{anyChar}*
 %%
 KIF
   : KIFexpressions EOF
-    { $$ = new ast.KIFNode($KIFexpressions); return $$; }
+    { $$ = new ast.KIFNode(@$, $KIFexpressions); return $$; }
   ;
 
 KIFexpressions
@@ -75,29 +75,29 @@ KIFexpression
 
 Word
   : IDENTIFIER
-    { $$ = new ast.WordNode($IDENTIFIER); }
+    { $$ = new ast.WordNode(@$, $IDENTIFIER); }
   ;
 
 Variable
   : QUESTION IDENTIFIER
-    { $$ = new ast.VariableNode($IDENTIFIER, 'IND'); }
+    { $$ = new ast.VariableNode(@$, $IDENTIFIER, 'IND'); }
   | MENTION IDENTIFIER
-    { $$ = new ast.VariableNode($IDENTIFIER, 'ROW'); }
+    { $$ = new ast.VariableNode(@$, $IDENTIFIER, 'ROW'); }
   ;
 
 String
   : STRINGLITERAL
-    { $$ = new ast.StringLiteralNode($STRINGLITERAL); }
+    { $$ = new ast.StringLiteralNode(@$, $STRINGLITERAL); }
   ;
 
 Number
   : NUMERICLITERAL
-    { $$ = new ast.NumericLiteralNode($NUMERICLITERAL); }
+    { $$ = new ast.NumericLiteralNode(@$, $NUMERICLITERAL); }
   ;
 
 FunctionTerm
   : LPAREN Word ArgumentList RPAREN
-    { $$ = new ast.FunctionTermNode($Word.word, $ArgumentList); }
+    { $$ = new ast.FunctionTermNode(@$, $Word.word, $ArgumentList); }
   ;
 
 ArgumentList
@@ -123,12 +123,12 @@ Sentence
 
 Equation
   : LPAREN EQUALS KIFexpression KIFexpression RPAREN
-    { $$ = new ast.EquationNode($KIFexpression1, $KIFexpression2); }
+    { $$ = new ast.EquationNode(@$, $KIFexpression1, $KIFexpression2); }
   ;
 
 RelSent
   : LPAREN Variable ArgumentList RPAREN
-    { $$ = new ast.RelSentNode($Variable, $ArgumentList); }
+    { $$ = new ast.RelSentNode(@$, $Variable, $ArgumentList); }
   ;
 
 LogicSent
@@ -146,36 +146,36 @@ QuantSent
 
 Negation
   : LPAREN NOT KIFexpression RPAREN
-    { $$ = new ast.NegationNode($KIFexpression); }
+    { $$ = new ast.NegationNode(@$, $KIFexpression); }
   ;
 
 Disjunction
   : LPAREN OR ArgumentList RPAREN
-    { $$ = new ast.DisjunctionNode($ArgumentList); }
+    { $$ = new ast.DisjunctionNode(@$, $ArgumentList); }
   ;
 
 Conjunction
   : LPAREN AND ArgumentList RPAREN
-    { $$ = new ast.ConjunctionNode($ArgumentList); }
+    { $$ = new ast.ConjunctionNode(@$, $ArgumentList); }
   ;
 
 Implication
   : LPAREN EQUALS RARROW KIFexpression KIFexpression RPAREN
-    { $$ = new ast.ImplicationNode($KIFexpression1, $KIFexpression2); }
+    { $$ = new ast.ImplicationNode(@$, $KIFexpression1, $KIFexpression2); }
   ;
 
 Equivalence
   : LPAREN LARROW EQUALS RARROW KIFexpression KIFexpression RPAREN
-    { $$ = new ast.EquivalenceNode($KIFexpression1, $KIFexpression2); }
+    { $$ = new ast.EquivalenceNode(@$, $KIFexpression1, $KIFexpression2); }
   ;
 
 UniversalSent
   : LPAREN FORALL LPAREN VariableList RPAREN KIFexpression RPAREN
-    { $$ = new ast.UniversalSentNode($VariableList, $KIFexpression); }
+    { $$ = new ast.UniversalSentNode(@$, $VariableList, $KIFexpression); }
   ;
 
 ExistentialSent
   :  LPAREN EXISTS LPAREN VariableList RPAREN KIFexpression RPAREN
-    { $$ = new ast.ExistentialSentNode($VariableList, $KIFexpression); }
+    { $$ = new ast.ExistentialSentNode(@$, $VariableList, $KIFexpression); }
   ;
 %%

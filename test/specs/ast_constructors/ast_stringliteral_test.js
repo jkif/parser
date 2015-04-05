@@ -9,10 +9,25 @@ describe('StringLiteralNode AST Constructor', function() {
     expect(ast.StringLiteralNode).to.exist;
   });
 
-  var sLNode = new ast.StringLiteralNode("blahasldjf1sdljkfBOOM");
+  var locData = {
+    first_line: 11,
+    last_line: 12,
+    first_column: 0,
+    last_column: 27
+  };
+
+  var sLNode = new ast.StringLiteralNode(locData, "blahasldjf1sdljkfBOOM");
 
   it('should have a "type" property set to "StringLiteralNode"', function() {
     expect(sLNode.type).to.equal('StringLiteralNode');
+  });
+
+  it('should have a "locationData" property', function() {
+    expect(sLNode.locationData).to.exist;
+  });
+
+  it('should have a "locationData" property that is an instance of Object', function() {
+    expect(sLNode.locationData).to.be.an.instanceof(Object);
   });
 
   it('should have a "rawString" property', function() {
