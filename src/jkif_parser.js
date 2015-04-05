@@ -1,6 +1,7 @@
 var fs = require('fs'),
-    Parser = require('jison').Parser,
     fsJson = require('jsonfile'),
+    p = require('bluebird'),
+    Parser = require('jison').Parser,
     grammars = fs.readFileSync(__dirname + '/grammars.jison', 'utf8'),
     jKifParser = new Parser(grammars);
 
@@ -12,21 +13,17 @@ jKifParser.parseFile = function(filePath, cb) {
 };
 
 
-jKifParser.parseFileP = function() {
-
-};
-
-
-jKifParser.writeParsedToFileP = function() {
-
-};
-
-
 jKifParser.writeParsedToFile = function(filePath, parsed, cb) {
   fsJson.writeFile(filePath, parsed, function(err) {
-    err ? cb(false) : cb(true);
+    err ? cb(err) : cb(null);
   });
 };
+
+
+jKifParser.parseFileP = p.promisify(jKifParser.parseFile);
+
+
+jKifParser.writeParsedToFileP = p.promisify(jKifParser.writeParsedToFile);
 
 
 module.exports = jKifParser;
