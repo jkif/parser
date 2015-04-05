@@ -7,7 +7,7 @@
 %{
   var path = require('path');
   var ast = require(path.resolve(__dirname +
-                                './../../../src/ast_constructors/ast_constructors'));
+                                './../../../lib/ast_constructors/ast_constructors'));
 %}
 
 %lex

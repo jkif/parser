@@ -2,8 +2,8 @@ var chai = require('chai'),
     expect = chai.expect,
     fs = require('fs'),
     path = require('path'),
-    jKif = require('../../../../src/jkif'),
-    ast = require('../../../../src/ast_constructors/ast_constructors'),
+    jKif = require('../../../../lib/jkif'),
+    ast = require('../../../../lib/ast_constructors/ast_constructors'),
     kifFile = fs.readFileSync(path.resolve(__dirname + './../../../resources/sumo_core.kif'), 'utf8'),
     parsed = jKif.Parser.parse(kifFile);
 
