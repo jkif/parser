@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function FunctionTermNode(funcName, argsList) {
-  this.type = 'FunctionTermNode';
+  BaseNode.call(this, 'FunctionTermNode');
   this.functionName = funcName;
   this.functionArgumentList = this.functionArgumentList || [];
   this.functionArgumentList = this.functionArgumentList.concat(argsList);

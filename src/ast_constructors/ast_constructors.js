@@ -1,4 +1,5 @@
 module.exports = {
+  ASTnodeConstructor: require('./ast_constructor_base'),
   KIFNode: require('./kifnode'),
   WordNode: require('./wordnode'),
   VariableNode: require('./variablenode'),

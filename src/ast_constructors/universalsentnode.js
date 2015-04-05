@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function UniversalSentNode(variableList, quantifiedSent) {
-  this.type = 'UniversalSentNode';
+  BaseNode.call(this, 'UniversalSentNode');
   this.variableList = this.variableList || [];
   this.variableList = this.variableList.concat(variableList);
   this.quantifiedSent = quantifiedSent;

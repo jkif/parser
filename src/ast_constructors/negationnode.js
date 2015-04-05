@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function NegationNode(negatedExpression) {
-  this.type = 'NegationNode';
+  BaseNode.call(this, 'NegationNode');
   this.negatedExpression = negatedExpression;
 }
 

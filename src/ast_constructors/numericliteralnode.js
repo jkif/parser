@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function NumericLiteralNode(rawNumber) {
-  this.type = 'NumericLiteralNode';
+  BaseNode.call(this, 'NumericLiteralNode');
   this.number = +rawNumber;
 }
 
