@@ -24,7 +24,7 @@ stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
 numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?\b
 identifier              {initialChar}{anyChar}*
 
-%options flex
+%options flex yylineno
 
 %%
 {white}             { /* ignore */ }
