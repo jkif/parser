@@ -9,6 +9,7 @@
     "mocha": "^2.2.1"
   },
   "dependencies": {
+    "bluebird": "^2.9.24",
     "jison": "^0.4.15",
     "jsonfile": "^2.0.0"
   }
