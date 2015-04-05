@@ -9,14 +9,25 @@ describe('ASTnodeConstructor', function() {
     expect(ast.ASTnodeConstructor).to.exist;
   });
 
-  var aNode = new ast.ASTnodeConstructor();
+  var locData = {
+    first_line: 11,
+    last_line: 12,
+    first_column: 0,
+    last_column: 27
+  };
+
+  var aNode = new ast.ASTnodeConstructor(null, locData);
 
   it('should have a "type" property set to "ASTnodeConstructor"', function() {
     expect(aNode.type).to.equal('ASTnodeConstructor');
   });
 
-  it('should have a "location" property', function() {
-    expect(aNode.location).to.exist;
+  it('should have a "locationData" property', function() {
+    expect(aNode.locationData).to.exist;
+  });
+
+  it('should have a "locationData" property that is an instance of Object', function() {
+    expect(aNode.locationData).to.be.an.instanceof(Object);
   });
 
 });
