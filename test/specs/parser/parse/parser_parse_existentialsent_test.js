@@ -1,7 +1,7 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../../../../src/jkif'),
-    ast = require('../../../../src/ast_constructors/ast_constructors');
+    jKif = require('../../../../lib/jkif'),
+    ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
 describe('jKif.Parser.parse Existentially-quantified sentence parsing', function() {

@@ -1,6 +1,6 @@
 var chai = require('chai'),
     expect = chai.expect,
-    ast = require('../../../src/ast_constructors/ast_constructors');
+    ast = require('../../../lib/ast_constructors/ast_constructors');
 
 
 describe('AST Constructors Manifest Export', function() {
