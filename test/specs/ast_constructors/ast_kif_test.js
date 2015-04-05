@@ -15,6 +15,10 @@ describe('KIFNode AST Constructor', function() {
     expect(kNode.type).to.equal('KIFNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(kNode.location).to.exist;
+  });
+
   it('should have an "expressions" property that is an instance of Array', function() {
     expect(kNode.expressions).to.be.an.instanceof(Array);
   });

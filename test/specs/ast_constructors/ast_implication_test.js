@@ -15,6 +15,10 @@ describe('ImplicationNode AST Constructor', function() {
     expect(iNode.type).to.equal('ImplicationNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(iNode.location).to.exist;
+  });
+
   it('should have an "antecedent" property', function() {
     expect(iNode.antecedent).to.be.an.instanceof(ast.WordNode);
   });

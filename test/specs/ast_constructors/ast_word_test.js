@@ -15,6 +15,10 @@ describe('WordNode AST Constructor', function() {
     expect(wNode.type).to.equal('WordNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(wNode.location).to.exist;
+  });
+
   it('should have a "word" property that is a String', function() {
     expect(typeof wNode.word).to.equal('string');
   });

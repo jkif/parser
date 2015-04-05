@@ -15,6 +15,10 @@ describe('VariableNode AST Constructor', function() {
     expect(vNode.type).to.equal('VariableNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(vNode.location).to.exist;
+  });
+
   it('should have a "variableType" property that is a String', function() {
     expect(typeof vNode.variableType).to.equal('string');
   });

@@ -15,6 +15,10 @@ describe('UniversalSentNode AST Constructor', function() {
     expect(uSNode.type).to.equal('UniversalSentNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(uSNode.location).to.exist;
+  });
+
   it('should have a "quantifiedSent" property', function() {
     expect(uSNode.quantifiedSent).to.be.an.instanceof(ast.WordNode);
   });

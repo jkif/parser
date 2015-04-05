@@ -15,6 +15,10 @@ describe('EquivalenceNode AST Constructor', function() {
     expect(eNode.type).to.equal('EquivalenceNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(eNode.location).to.exist;
+  });
+
   it('should have an "expressions" property that is an instance of Array', function() {
     expect(eNode.expressions).to.be.an.instanceof(Array);
   });

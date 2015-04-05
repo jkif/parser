@@ -15,6 +15,10 @@ describe('NumericLiteralNode AST Constructor', function() {
     expect(nLNode.type).to.equal('NumericLiteralNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(nLNode.location).to.exist;
+  });
+
   it('should have a "number" property that is a Number', function() {
     expect(typeof nLNode.number).to.equal('number');
   });

@@ -15,6 +15,10 @@ describe('RelSentNode AST Constructor', function() {
     expect(rSNode.type).to.equal('RelSentNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(rSNode.location).to.exist;
+  });
+
   it('should have a "variable" property that is a VariableNode', function() {
     expect(rSNode.variable).to.be.an.instanceof(ast.VariableNode);
   });

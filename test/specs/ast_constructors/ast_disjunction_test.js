@@ -15,6 +15,10 @@ describe('DisjunctionNode AST Constructor', function() {
     expect(dNode.type).to.equal('DisjunctionNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(dNode.location).to.exist;
+  });
+
   it('should have a "disjuncts" property that is an instance of Array', function() {
     expect(dNode.disjuncts).to.be.an.instanceof(Array);
   });

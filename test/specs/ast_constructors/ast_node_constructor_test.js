@@ -15,4 +15,8 @@ describe('ASTnodeConstructor', function() {
     expect(aNode.type).to.equal('ASTnodeConstructor');
   });
 
+  it('should have a "location" property', function() {
+    expect(aNode.location).to.exist;
+  });
+
 });

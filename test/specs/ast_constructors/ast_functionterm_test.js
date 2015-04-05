@@ -15,6 +15,10 @@ describe('FunctionTermNode AST Constructor', function() {
     expect(fNode.type).to.equal('FunctionTermNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(fNode.location).to.exist;
+  });
+
   it('should have a "functionName" property that is a String', function() {
     expect(typeof fNode.functionName).to.equal('string');
   });

@@ -15,6 +15,10 @@ describe('StringLiteralNode AST Constructor', function() {
     expect(sLNode.type).to.equal('StringLiteralNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(sLNode.location).to.exist;
+  });
+
   it('should have a "rawString" property', function() {
     expect(typeof sLNode.rawString).to.equal('string');
   });

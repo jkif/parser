@@ -15,6 +15,10 @@ describe('ConjuctionNode AST Constructor', function() {
     expect(cNode.type).to.equal('ConjunctionNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(cNode.location).to.exist;
+  });
+
   it('should have a "conjuncts" property that is an instance of Array', function() {
     expect(cNode.conjuncts).to.be.an.instanceof(Array);
   });

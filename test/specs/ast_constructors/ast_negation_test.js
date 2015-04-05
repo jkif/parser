@@ -15,6 +15,10 @@ describe('NegationNode AST Constructor', function() {
     expect(nNode.type).to.equal('NegationNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(nNode.location).to.exist;
+  });
+
   it('should have a "negatedExpression" property', function() {
     expect(nNode.negatedExpression).to.be.an.instanceof(ast.WordNode);
   });

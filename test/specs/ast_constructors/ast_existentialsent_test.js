@@ -15,6 +15,10 @@ describe('ExistentialSentNode AST Constructor', function() {
     expect(eNode.type).to.equal('ExistentialSentNode');
   });
 
+  it('should have a "location" property', function() {
+    expect(eNode.location).to.exist;
+  });
+
   it('should have a "variableList" property that is an instance of Array', function() {
     expect(eNode.variableList).to.be.an.instanceof(Array);
   });
