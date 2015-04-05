@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function DisjunctionNode(disjuncts) {
-  this.type = 'DisjunctionNode';
+  BaseNode.call(this, 'DisjunctionNode');
   this.disjuncts = this.disjuncts || [];
   this.disjuncts = this.disjuncts.concat(disjuncts);
 }

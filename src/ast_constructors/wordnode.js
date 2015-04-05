@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function WordNode(identifier) {
-  this.type = 'WordNode';
+  BaseNode.call(this, 'WordNode');
   this.word = identifier;
 }
 

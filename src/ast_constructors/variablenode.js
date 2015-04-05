@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function VariableNode(identifier, variableType) {
-  this.type = 'VariableNode';
+  BaseNode.call(this, 'VariableNode');
   this.variableType = variableType || 'IND';
   this.variableName = identifier;
 }

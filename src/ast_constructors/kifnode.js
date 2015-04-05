@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function KIFNode(kifExpressions) {
-  this.type = 'KIFNode';
+  BaseNode.call(this, 'KIFNode');
   this.expressions = this.expressions || [];
   this.expressions = this.expressions.concat(kifExpressions);
 }

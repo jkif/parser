@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function EquivalenceNode(firstExpr, secondExpr) {
-  this.type = 'EquivalenceNode';
+  BaseNode.call(this, 'EquivalenceNode');
   this.expressions = this.expressions || [];
   this.expressions = this.expressions.concat(firstExpr, secondExpr);
 }

@@ -3,32 +3,41 @@ var chai = require('chai'),
     fs = require('fs'),
     fsJson = require('jsonfile'),
     path = require('path'),
-    jKif = require('../../src/jkif'),
-    ast = require('../../src/ast_constructors/ast_constructors'),
-    testResourcesPath = path.resolve(__dirname + './../resources/'),
+    jKif = require('../../../../src/jkif'),
+    ast = require('../../../../src/ast_constructors/ast_constructors'),
+    testResourcesPath = path.resolve(__dirname + '../../../../resources/'),
     kifFilePath = path.resolve(testResourcesPath + '/sumo_core.kif'),
     jsonTestOutputPath = path.resolve(testResourcesPath + '/test_output.json');
 
 
-describe('jKif.Parser Extras Callback-Style', function() {
+describe('jKif.Parser Extras Promise-Style', function() {
 
-  describe('#parseFile', function() {
+  describe('#parseFileP', function() {
     it('should parse a .kif file into a KIFNode', function(done) {
-      jKif.Parser.parseFile(kifFilePath, function(err, parsed) {
+      jKif.Parser.parseFileP(kifFilePath).then(function(parsed) {
         expect(parsed).to.be.an.instanceof(ast.KIFNode);
+        done();
+      }).catch(function(err) {
+        console.error(err);
         done();
       });
     });
   });
 
-  describe('#writeParsedToFile', function() {
+  describe('#writeParsedToFileP', function() {
     var parsed;
     beforeEach(function(done) {
-      jKif.Parser.parseFile(kifFilePath, function(err, kif) {
+      jKif.Parser.parseFileP(kifFilePath).then(function(kif) {
         parsed = kif;
-        jKif.Parser.writeParsedToFile(jsonTestOutputPath, parsed, function(success) {
+        jKif.Parser.writeParsedToFileP(jsonTestOutputPath, parsed).then(function(success) {
+          done();
+        }).catch(function(err) {
+          console.error(err);
           done();
         });
+      }).catch(function(err) {
+        console.error(err);
+        done();
       });
     });
 

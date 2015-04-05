@@ -1,5 +1,8 @@
+var BaseNode = require('./ast_constructor_base');
+
+
 function ExistentialSentNode(variableList, quantifiedSent) {
-  this.type = 'ExistentialSentNode';
+  BaseNode.call(this, 'ExistentialSentNode');
   this.variableList = this.variableList || [];
   this.variableList = this.variableList.concat(variableList);
   this.quantifiedSent = quantifiedSent;
