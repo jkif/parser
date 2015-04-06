@@ -4,6 +4,10 @@ var chai = require('chai'),
     ast = require('../../../lib/ast_constructors/ast_constructors');
 
 
-describe('jKif.API', function() {
+describe('jKif.Utility', function() {
+
+  xit('responds to #something', function() {
+    expect(jKif.Utility).to.respondTo('something');
+  });
 
 });
