@@ -1,12 +1,14 @@
+;; A farmer likes a tractor ;)
 (exists (?F ?T)
  (and
    (instance ?F Farmer)
    (instance ?T Tractor)
    (likes ?F ?T)))
 
+;; This is a core definition of the SUMO 'Class'
 (<=>
   (instance ?CLASS Class)
-  (subclass ?CLASS Entity))
+  (subclass ?CLASS Entity)) ; Entity is the core object in SUMO
 
 (exists (?THING)
   (instance ?THING Entity))
