@@ -19,12 +19,14 @@ ignoreable              {white}|{commentLine}
 initialChar             [a-zA-Z]
 digit                   [0-9]
 decimalDigits           {digit}+
+eE                      [eE]
+exponent                {eE}(\-)?{decimalDigits}
 separator               [\-\_]
 anyChar                 {initialChar}|{digit}|{separator}
 special                 [#^!\$%&\*\+-\.\<=>\?@_~\\]
 freeChar                {anyChar}|{special}|{white}
 stringLiteral           (\"{freeChar}*\")|(\'{freeChar}*\')
-numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?\b
+numericLiteral          (\-)?{decimalDigits}("."{decimalDigits})?({exponent})?\b
 identifier              {initialChar}{anyChar}*
 
 %options flex yylineno
