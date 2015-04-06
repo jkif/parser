@@ -13,6 +13,9 @@
 %lex
 
 white                   \s+
+comment                 ";"
+commentLine             {comment}[^\n]* \n?
+ignoreable              {white}|{commentLine}
 initialChar             [a-zA-Z]
 digit                   [0-9]
 decimalDigits           {digit}+
@@ -27,7 +30,7 @@ identifier              {initialChar}{anyChar}*
 %options flex yylineno
 
 %%
-{white}             { /* ignore */ }
+{ignoreable}        { /* ignore */ }
 "("                 { return 'LPAREN'; }
 ")"                 { return 'RPAREN'; }
 "?"                 { return 'QUESTION'; }
