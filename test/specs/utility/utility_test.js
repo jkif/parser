@@ -6,8 +6,20 @@ var chai = require('chai'),
 
 describe('jKif.Utility', function() {
 
-  xit('responds to #something', function() {
-    expect(jKif.Utility).to.respondTo('something');
+  it('responds to #isJkif', function() {
+    expect(jKif.Utility).to.respondTo('isJkif');
+  });
+
+  it('responds to #jkifLength', function() {
+    expect(jKif.Utility).to.respondTo('jkifLength');
+  });
+
+  it('responds to #numOfNode', function() {
+    expect(jKif.Utility).to.respondTo('numOfNode');
+  });
+
+  it('responds to #eachChild', function() {
+    expect(jKif.Utility).to.respondTo('eachChild');
   });
 
 });
