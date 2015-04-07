@@ -4,10 +4,10 @@ var chai = require('chai'),
     ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
-describe('jKif.Utility #eachChild', function() {
+describe('jKif.Utility #eachNode', function() {
 
   it('should return undefined', function() {
-    var result = jKif.Utility.eachChild('', function() {});
+    var result = jKif.Utility.eachNode('', function() {});
     expect(result).to.be.undefined;
   });
 
@@ -19,13 +19,13 @@ describe('jKif.Utility #eachChild', function() {
         parsed2 = jKif.Parser.parse('(EXISTS (?variable) word)'),
         parsed3 = jKif.Parser.parse('(and (instance ?CLARK Human)(isSmart ?Clark))');
 
-    jKif.Utility.eachChild(parsed, function(child) {
+    jKif.Utility.eachNode(parsed, function(child) {
       testStack.push(child);
     });
-    jKif.Utility.eachChild(parsed2, function(child) {
+    jKif.Utility.eachNode(parsed2, function(child) {
       testStack2.push(child);
     });
-    jKif.Utility.eachChild(parsed3, function(child) {
+    jKif.Utility.eachNode(parsed3, function(child) {
       testStack3.push(child);
     });
     expect(testStack.length).to.equal(1);
