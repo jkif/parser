@@ -15,10 +15,6 @@ describe('jKif.Utility #numAtoms', function() {
     expect(testedFalse).to.be.a('number');
   });
 
-  it('should return an integer value', function() {
-    expect(testedFalse % 2 === 0).to.be.true;
-  });
-
   it('should return the correct number of atoms', function() {
     expect(testedFalse).to.equal(0);
     expect(testedTrue).to.equal(1);
