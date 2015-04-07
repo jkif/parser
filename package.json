@@ -8,7 +8,7 @@
   "license": "MIT",
   "main": "lib/jkif.js",
   "scripts": {
-    "test": "for f in test/specs/* test/specs/**/*; do echo \"$f\"; mocha \"$f\"; done; exit 0"
+    "test": "for f in test/specs/**/*; do echo \"$f\"; mocha \"$f\"; done; exit 0"
   },
   "dependencies": {
     "bluebird": "^2.9.24",
