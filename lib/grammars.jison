@@ -1,7 +1,10 @@
-/* jKif - 2015
-** Lexical Analysis and Parsing of SUO-KIF into JavaScript Objects
-** Copyright (C) Clark Feusier <cfeusier@gmail.com> - All Rights Reserved
-*/
+/**
+ * jKif - 2015
+ * grammars.jison
+ * @file Language Grammars for SUO-KIF via JavaScript, Flex, and Jison
+ * @author Clark Feusier - cfeusier@gmail.com
+ * @copyright Copyright (C) Clark Feusier - All Rights Reserved
+ */
 
 
 %{
