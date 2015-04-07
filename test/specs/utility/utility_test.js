@@ -26,4 +26,8 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('isAtom');
   });
 
+  it('responds to #isMolecule', function() {
+    expect(jKif.Utility).to.respondTo('isMolecule');
+  });
+
 });

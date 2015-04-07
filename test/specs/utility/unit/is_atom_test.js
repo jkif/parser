@@ -1,13 +1,7 @@
 var chai = require('chai'),
     expect = chai.expect,
     jKif = require('../../../../lib/jkif'),
-    ast = require('../../../../lib/ast_constructors/ast_constructors'),
-    atomRegistry = {
-      'WordNode': true,
-      'VariableNode': true,
-      'StringLiteralNode': true,
-      'NumericLiteralNode': true
-    };
+    ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
 describe('jKif.Utility #isAtom', function() {
