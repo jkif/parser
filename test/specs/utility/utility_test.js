@@ -22,4 +22,8 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('eachChild');
   });
 
+  it('responds to #isAtom', function() {
+    expect(jKif.Utility).to.respondTo('isAtom');
+  });
+
 });
