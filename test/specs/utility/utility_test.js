@@ -38,4 +38,12 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('numMolecules');
   });
 
+  it('responds to #allAtoms', function() {
+    expect(jKif.Utility).to.respondTo('allAtoms');
+  });
+
+  it('responds to #allMolecules', function() {
+    expect(jKif.Utility).to.respondTo('allMolecules');
+  });
+
 });
