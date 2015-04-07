@@ -77,8 +77,27 @@ KIFexpression
   | Variable
   | String
   | Number
-  | FunctionTerm
   | Sentence
+  ;
+
+Sentence
+  : Equation
+  | RelSent
+  | LogicSent
+  | QuantSent
+  ;
+
+LogicSent
+  : Negation
+  | Disjunction
+  | Conjunction
+  | Implication
+  | Equivalence
+  ;
+
+QuantSent
+  : UniversalSent
+  | ExistentialSent
   ;
 
 Word
@@ -103,11 +122,6 @@ Number
     { $$ = new ast.NumericLiteralNode(@$, $NUMERICLITERAL); }
   ;
 
-FunctionTerm
-  : LPAREN Word ArgumentList RPAREN
-    { $$ = new ast.FunctionTermNode(@$, $Word.word, $ArgumentList); }
-  ;
-
 ArgumentList
   : ArgumentList KIFexpression
     { $$ = $ArgumentList.concat($KIFexpression); }
@@ -122,13 +136,6 @@ VariableList
     { $$ = [$Variable]; }
   ;
 
-Sentence
-  : Equation
-  | RelSent
-  | LogicSent
-  | QuantSent
-  ;
-
 Equation
   : LPAREN EQUALS KIFexpression KIFexpression RPAREN
     { $$ = new ast.EquationNode(@$, $KIFexpression1, $KIFexpression2); }
@@ -137,19 +144,8 @@ Equation
 RelSent
   : LPAREN Variable ArgumentList RPAREN
     { $$ = new ast.RelSentNode(@$, $Variable, $ArgumentList); }
-  ;
-
-LogicSent
-  : Negation
-  | Disjunction
-  | Conjunction
-  | Implication
-  | Equivalence
-  ;
-
-QuantSent
-  : UniversalSent
-  | ExistentialSent
+  | LPAREN Word ArgumentList RPAREN
+    { $$ = new ast.RelSentNode(@$, $Word, $ArgumentList); }
   ;
 
 Negation

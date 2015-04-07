@@ -35,11 +35,10 @@ describe('jKif.Parser.parse Equation parsing', function() {
     var parsed = jKif.Parser.parse('(= firstTerm (function argument))').expressions[0];
     expect(parsed.terms).to.have.length(2);
     expect(parsed.terms[0]).to.be.an.instanceof(ast.WordNode);
-    expect(parsed.terms[1]).to.be.an.instanceof(ast.FunctionTermNode);
-    expect(parsed.terms[1].functionName).to.equal('function');
-    expect(parsed.terms[1].functionArgumentList).to.have.length(1);
-    expect(parsed.terms[1].functionArgumentList[0]).to.be.an.instanceof(ast.WordNode);
-    expect(parsed.terms[1].functionArgumentList[0].word).to.equal('argument');
+    expect(parsed.terms[1]).to.be.an.instanceof(ast.RelSentNode);
+    expect(parsed.terms[1].argumentList).to.have.length(1);
+    expect(parsed.terms[1].argumentList[0]).to.be.an.instanceof(ast.WordNode);
+    expect(parsed.terms[1].argumentList[0].word).to.equal('argument');
   });
 
   it('correctly parses higher-order Equations', function() {

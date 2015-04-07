@@ -30,7 +30,7 @@ describe('jKif.Utility #jkifLength', function() {
     expect(len2).to.equal(2);
     expect(lenNested).to.equal(4);
     expect(lenNestedTwice).to.equal(6);
-    expect(lenNestedThrice).to.equal(8);
+    expect(lenNestedThrice).to.equal(9);
   });
 
 });

@@ -22,9 +22,9 @@ describe('jKif.Utility #numOfNode', function() {
     var num1 = jKif.Utility.numOfNode(empty, 'KIFNode');
     var simple = jKif.Parser.parse('subclass Class Entity');
     var complex = jKif.Parser.parse('(<=> (instance ?CLASS Class)(subclass ?CLASS Entity))');
-    var zero = jKif.Utility.numOfNode(simple, 'FunctionTermNode');
+    var zero = jKif.Utility.numOfNode(simple, 'RelSentNode');
     var one = jKif.Utility.numOfNode(complex, 'EquivalenceNode');
-    var two = jKif.Utility.numOfNode(complex, 'FunctionTermNode');
+    var two = jKif.Utility.numOfNode(complex, 'RelSentNode');
     var two2 = jKif.Utility.numOfNode(complex, 'VariableNode');
     var three = jKif.Utility.numOfNode(simple, 'WordNode');
     expect(num0).to.equal(0);

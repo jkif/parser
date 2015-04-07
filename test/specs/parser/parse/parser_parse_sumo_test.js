@@ -19,7 +19,7 @@ describe('jKif SUMO KIF File Parser', function() {
     var existSent = exprs[0];
     expect(existSent).to.be.an.instanceof(ast.ExistentialSentNode);
     expect(existSent.quantifiedSent).to.be.an.instanceof(ast.ConjunctionNode);
-    expect(existSent.quantifiedSent.conjuncts[0]).to.be.an.instanceof(ast.FunctionTermNode);
+    expect(existSent.quantifiedSent.conjuncts[0]).to.be.an.instanceof(ast.RelSentNode);
   });
 
   it('should parse complex definitions correctly', function() {

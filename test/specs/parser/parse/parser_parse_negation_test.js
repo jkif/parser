@@ -43,7 +43,7 @@ describe('jKif.Parser.parse Negated sentence parsing', function() {
 
   it('correctly parses a negated FunctionTerm', function() {
     var parsed = jKif.Parser.parse('(not (function argument))').expressions[0];
-    expect(parsed.negatedExpression).to.be.an.instanceof(ast.FunctionTermNode);
+    expect(parsed.negatedExpression).to.be.an.instanceof(ast.RelSentNode);
   });
 
 });

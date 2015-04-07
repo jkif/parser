@@ -31,7 +31,7 @@ describe('RelSentNode AST Constructor', function() {
   });
 
   it('should have a "variable" property that is a VariableNode', function() {
-    expect(rSNode.variable).to.be.an.instanceof(ast.VariableNode);
+    expect(rSNode.constant).to.be.an.instanceof(ast.VariableNode);
   });
 
   it('should have an "argumentList" property that is an instance of Array', function() {
