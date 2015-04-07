@@ -1,64 +1,175 @@
 {
   "type": "KIFNode",
+  "locationData": {
+    "first_line": 1,
+    "last_line": 5,
+    "first_column": 0,
+    "last_column": 18
+  },
   "expressions": [
     {
       "type": "ExistentialSentNode",
+      "locationData": {
+        "first_line": 1,
+        "last_line": 5,
+        "first_column": 0,
+        "last_column": 18
+      },
       "variableList": [
         {
           "type": "VariableNode",
+          "locationData": {
+            "first_line": 1,
+            "last_line": 1,
+            "first_column": 9,
+            "last_column": 11
+          },
           "variableType": "IND",
           "variableName": "F"
         },
         {
           "type": "VariableNode",
+          "locationData": {
+            "first_line": 1,
+            "last_line": 1,
+            "first_column": 12,
+            "last_column": 14
+          },
           "variableType": "IND",
           "variableName": "T"
         }
       ],
       "quantifiedSent": {
         "type": "ConjunctionNode",
+        "locationData": {
+          "first_line": 2,
+          "last_line": 5,
+          "first_column": 1,
+          "last_column": 17
+        },
         "conjuncts": [
           {
-            "type": "FunctionTermNode",
-            "functionName": "instance",
-            "functionArgumentList": [
+            "type": "RelSentNode",
+            "locationData": {
+              "first_line": 3,
+              "last_line": 3,
+              "first_column": 3,
+              "last_column": 23
+            },
+            "constant": {
+              "type": "WordNode",
+              "locationData": {
+                "first_line": 3,
+                "last_line": 3,
+                "first_column": 4,
+                "last_column": 12
+              },
+              "word": "instance"
+            },
+            "argumentList": [
               {
                 "type": "VariableNode",
+                "locationData": {
+                  "first_line": 3,
+                  "last_line": 3,
+                  "first_column": 13,
+                  "last_column": 15
+                },
                 "variableType": "IND",
                 "variableName": "F"
               },
               {
                 "type": "WordNode",
+                "locationData": {
+                  "first_line": 3,
+                  "last_line": 3,
+                  "first_column": 16,
+                  "last_column": 22
+                },
                 "word": "Farmer"
               }
             ]
           },
           {
-            "type": "FunctionTermNode",
-            "functionName": "instance",
-            "functionArgumentList": [
+            "type": "RelSentNode",
+            "locationData": {
+              "first_line": 4,
+              "last_line": 4,
+              "first_column": 3,
+              "last_column": 24
+            },
+            "constant": {
+              "type": "WordNode",
+              "locationData": {
+                "first_line": 4,
+                "last_line": 4,
+                "first_column": 4,
+                "last_column": 12
+              },
+              "word": "instance"
+            },
+            "argumentList": [
               {
                 "type": "VariableNode",
+                "locationData": {
+                  "first_line": 4,
+                  "last_line": 4,
+                  "first_column": 13,
+                  "last_column": 15
+                },
                 "variableType": "IND",
                 "variableName": "T"
               },
               {
                 "type": "WordNode",
+                "locationData": {
+                  "first_line": 4,
+                  "last_line": 4,
+                  "first_column": 16,
+                  "last_column": 23
+                },
                 "word": "Tractor"
               }
             ]
           },
           {
-            "type": "FunctionTermNode",
-            "functionName": "likes",
-            "functionArgumentList": [
+            "type": "RelSentNode",
+            "locationData": {
+              "first_line": 5,
+              "last_line": 5,
+              "first_column": 3,
+              "last_column": 16
+            },
+            "constant": {
+              "type": "WordNode",
+              "locationData": {
+                "first_line": 5,
+                "last_line": 5,
+                "first_column": 4,
+                "last_column": 9
+              },
+              "word": "likes"
+            },
+            "argumentList": [
               {
                 "type": "VariableNode",
+                "locationData": {
+                  "first_line": 5,
+                  "last_line": 5,
+                  "first_column": 10,
+                  "last_column": 12
+                },
                 "variableType": "IND",
                 "variableName": "F"
               },
               {
                 "type": "VariableNode",
+                "locationData": {
+                  "first_line": 5,
+                  "last_line": 5,
+                  "first_column": 13,
+                  "last_column": 15
+                },
                 "variableType": "IND",
                 "variableName": "T"
               }

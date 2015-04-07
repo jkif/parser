@@ -4,7 +4,7 @@ var fs = require('fs'),
     jKif = require('../../lib/jkif'),
     ast = require('../../lib/ast_constructors/ast_constructors'),
     kifFile = fs.readFileSync(path.resolve(__dirname +
-    './farmer_tractor.kif'), 'utf8'), // change the input kif file
+    '/farmer_tractor.kif'), 'utf8'), // change the input kif file
     parsed = jKif.Parser.parse(kifFile);
 
 
