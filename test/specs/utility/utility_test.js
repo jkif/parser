@@ -18,8 +18,8 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('numOfNode');
   });
 
-  it('responds to #eachChild', function() {
-    expect(jKif.Utility).to.respondTo('eachChild');
+  it('responds to #eachNode', function() {
+    expect(jKif.Utility).to.respondTo('eachNode');
   });
 
   it('responds to #isAtom', function() {
@@ -28,6 +28,10 @@ describe('jKif.Utility', function() {
 
   it('responds to #isMolecule', function() {
     expect(jKif.Utility).to.respondTo('isMolecule');
+  });
+
+  it('responds to #numAtoms', function() {
+    expect(jKif.Utility).to.respondTo('numAtoms');
   });
 
 });
