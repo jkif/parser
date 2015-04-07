@@ -30,7 +30,7 @@ describe('jKif.Utility #eachChild', function() {
     });
     expect(testStack.length).to.equal(1);
     expect(testStack2.length).to.equal(3);
-    expect(testStack3.length).to.equal(6);
+    expect(testStack3.length).to.equal(8);
   });
 
 });

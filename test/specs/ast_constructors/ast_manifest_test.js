@@ -37,10 +37,6 @@ describe('AST Constructors Manifest Export', function() {
     expect(ast.NumericLiteralNode).to.exist;
   });
 
-  it('should have a FunctionTermNode Constructor as a property', function() {
-    expect(ast.FunctionTermNode).to.exist;
-  });
-
   it('should have an EquationNode Constructor as a property', function() {
     expect(ast.EquationNode).to.exist;
   });
