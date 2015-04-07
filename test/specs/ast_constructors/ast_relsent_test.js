@@ -30,7 +30,7 @@ describe('RelSentNode AST Constructor', function() {
     expect(rSNode.locationData).to.be.an.instanceof(Object);
   });
 
-  it('should have a "variable" property that is a VariableNode', function() {
+  it('should have a "constant" property that is a VariableNode', function() {
     expect(rSNode.constant).to.be.an.instanceof(ast.VariableNode);
   });
 
