@@ -34,4 +34,8 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('numAtoms');
   });
 
+  it('responds to #numMolecules', function() {
+    expect(jKif.Utility).to.respondTo('numMolecules');
+  });
+
 });
