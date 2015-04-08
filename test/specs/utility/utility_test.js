@@ -46,4 +46,8 @@ describe('jKif.Utility', function() {
     expect(jKif.Utility).to.respondTo('allMolecules');
   });
 
+  it('responds to #knowledgeBase', function() {
+    expect(jKif.Utility).to.respondTo('knowledgeBase');
+  });
+
 });
