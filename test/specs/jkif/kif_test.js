@@ -18,12 +18,20 @@ describe('jKif', function() {
     expect(jKif.Utility).to.exist;
   });
 
+  it('should have a Thinker property', function() {
+    expect(jKif.Thinker).to.exist;
+  });
+
   it('should have an object for the Parser', function() {
     expect(jKif.Parser).to.be.an.instanceof(Object);
   });
 
   it('should have an object for the Utility', function() {
     expect(jKif.Utility).to.be.an.instanceof(Object);
+  });
+
+  it('should have an object for the Thinker', function() {
+    expect(jKif.Thinker).to.be.an.instanceof(Object);
   });
 
 });
