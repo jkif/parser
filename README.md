@@ -47,9 +47,11 @@ The product roadmap is managed through this repository's **Issues** &mdash; [vie
 
 We welcome contributions, but please read our [contribution guidelines](CONTRIBUTING.md) before submitting your work.
 
-<!--
-
 ## Development Requirements
+
+- Node, Chai, Mocha, Jison, Bluebird, JSONFile
+
+<!--
 
 ### Installing Dependencies
 
