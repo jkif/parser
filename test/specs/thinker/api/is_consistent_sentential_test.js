@@ -6,11 +6,15 @@ var chai = require('chai'),
 
 describe('jKif.Thinker #isConsistentSentential', function() {
 
-  var parsedEmpty = jKif.Parser.parse('');
-  var emptyKb = jKif.Utility.knowledgeBase(parsedEmpty);
+  // var parsedEmpty = jKif.Parser.parse('');
+  // var emptyKb = jKif.Utility.knowledgeBase(parsedEmpty);
 
-  it('should return a Boolean value', function() {
-    expect(jKif.Thinker.isConsistentSentential(emptyKb)).to.be.a('boolean');
-  });
+  // it('should return a Boolean value', function() {
+  //   expect(jKif.Thinker.isConsistentSentential(emptyKb)).to.be.a('boolean');
+  // });
 
+
+  var parsedAtom = jKif.Parser.parse('(GovernmentFn UnitedStates)(not (GovernmentFn Mexico))(here test)');
+  var simpleKb = jKif.Utility.knowledgeBase(parsedAtom);
+  var tree = jKif.Thinker.isConsistentSentential(simpleKb);
 });
