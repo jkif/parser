@@ -32,7 +32,7 @@ describe('jKif.Utility #knowledgeBase', function() {
   });
 
   it('should add deeply nested sentences from the input into the result array', function() {
-    expect(kbSent3).to.have.length(5);
+    expect(kbSent3).to.have.length(2);
   });
 
   it('should add the correct sentences from the input into the result array', function() {
@@ -41,9 +41,6 @@ describe('jKif.Utility #knowledgeBase', function() {
     expect(kbSent2[1]).to.be.an.instanceof(ast.RelSentNode);
     expect(kbSent3[0]).to.be.an.instanceof(ast.UniversalSentNode);
     expect(kbSent3[1]).to.be.an.instanceof(ast.ExistentialSentNode);
-    expect(kbSent3[2]).to.be.an.instanceof(ast.DisjunctionNode);
-    expect(kbSent3[3]).to.be.an.instanceof(ast.RelSentNode);
-    expect(kbSent3[4]).to.be.an.instanceof(ast.RelSentNode);
   });
 
 });
