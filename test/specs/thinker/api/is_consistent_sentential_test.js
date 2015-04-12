@@ -14,7 +14,7 @@ describe('jKif.Thinker #isConsistentSentential', function() {
   // });
 
 
-  var parsedAtom = jKif.Parser.parse('(GovernmentFn UnitedStates)(not (GovernmentFn Mexico))(here test)');
-  var simpleKb = jKif.Utility.knowledgeBase(parsedAtom);
-  var tree = jKif.Thinker.isConsistentSentential(simpleKb);
+  // var parsedAtom = jKif.Parser.parse('(GovernmentFn UnitedStates)');
+  // var simpleKb = jKif.Utility.knowledgeBase(parsedAtom);
+  // var tree = jKif.Thinker.isConsistentSentential(simpleKb);
 });
