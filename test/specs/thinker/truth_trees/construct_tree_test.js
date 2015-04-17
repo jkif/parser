@@ -58,4 +58,60 @@ describe('#constructTree helper method', function() {
     expect(ttSentNest4.tree.paths.open[0].value).to.be.true;
   });
 
+  it('should return a tree with a stepCount of 2 for knowledgebase inputs with a single conjunction sentence', function() {
+    var conj = jKif.Utility.knowledgeBase(jKif.Parser.parse('(and (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttConj = new tt.TruthTreeSent(conj);
+    expect(ttConj.tree.stepCount).to.equal(2);
+  });
+
+  it('should return a tree with a stepCount of 2 for knowledgebase inputs with a single disjunction sentence', function() {
+    var dis = jKif.Utility.knowledgeBase(jKif.Parser.parse('(OR (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttDis = new tt.TruthTreeSent(dis);
+    expect(ttDis.tree.stepCount).to.equal(2);
+  });
+
+  it('should return a tree with the correct open path truth values for negated conjunctions', function() {
+    var negConj = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (and (instance ?CLARK Human)(subclass Human Entity)))'));
+    var ttNegConj = new tt.TruthTreeSent(negConj);
+    expect(ttNegConj.tree.paths.open[0].value).to.be.false;
+    expect(ttNegConj.tree.paths.open[1].value).to.be.false;
+  });
+
+  it('should return a tree with the correct open path truth values for negated disjunctions', function() {
+    var negDis = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (or (instance ?CLARK Human)(subclass Human Entity)))'));
+    var ttNegDis = new tt.TruthTreeSent(negDis);
+    expect(ttNegDis.tree.paths.open[0].value).to.be.false;
+    expect(ttNegDis.tree.paths.open[1].value).to.be.false;
+  });
+
+  it('should return a tree with the correct open path truth values for nested negated conjunctions', function() {
+    var negConj = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (and (not (instance ?CLARK Human))(subclass Human Entity)))'));
+    var ttNegConj = new tt.TruthTreeSent(negConj);
+    expect(ttNegConj.tree.paths.open[0].value).to.be.true;
+    expect(ttNegConj.tree.paths.open[1].value).to.be.false;
+    var negConj2 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(and (not (instance ?CLARK Human))(subclass Human Entity))'));
+    var ttNegConj2 = new tt.TruthTreeSent(negConj2);
+    expect(ttNegConj2.tree.paths.open[0].value).to.be.false;
+    expect(ttNegConj2.tree.paths.open[1].value).to.be.true;
+    var negConj3 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(and (not (instance ?CLARK Human))(not (subclass Human Entity)))'));
+    var ttNegConj3 = new tt.TruthTreeSent(negConj3);
+    expect(ttNegConj3.tree.paths.open[0].value).to.be.false;
+    expect(ttNegConj3.tree.paths.open[1].value).to.be.false;
+  });
+
+  it('should return a tree with the correct open path truth values for nested negated disjunctions', function() {
+    var negDis = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (or(not (instance ?CLARK Human))(subclass Human Entity)))'));
+    var ttNegDis = new tt.TruthTreeSent(negDis);
+    expect(ttNegDis.tree.paths.open[0].value).to.be.true;
+    expect(ttNegDis.tree.paths.open[1].value).to.be.false;
+    var negDis2 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(or (not (instance ?CLARK Human))(subclass Human Entity))'));
+    var ttNegDis2 = new tt.TruthTreeSent(negDis2);
+    expect(ttNegDis2.tree.paths.open[0].value).to.be.false;
+    expect(ttNegDis2.tree.paths.open[1].value).to.be.true;
+    var negDis3 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(or (not (instance ?CLARK Human))(not (subclass Human Entity)))'));
+    var ttNegDis3 = new tt.TruthTreeSent(negDis3);
+    expect(ttNegDis3.tree.paths.open[0].value).to.be.false;
+    expect(ttNegDis3.tree.paths.open[1].value).to.be.false;
+  });
+
 });
