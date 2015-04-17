@@ -114,4 +114,46 @@ describe('#constructTree helper method', function() {
     expect(ttNegDis3.tree.paths.open[1].value).to.be.false;
   });
 
+  it('should return a tree with a stepCount of 2 for knowledgebase inputs with a single implication sentence (atoms for ant and consq)', function() {
+    var imp = jKif.Utility.knowledgeBase(jKif.Parser.parse('(=> (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttImp = new tt.TruthTreeSent(imp);
+    expect(ttImp.tree.stepCount).to.equal(2);
+  });
+
+  it('should return a tree with the correct open path truth values for implication sentences', function() {
+    var imp = jKif.Utility.knowledgeBase(jKif.Parser.parse('(=> (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttImp = new tt.TruthTreeSent(imp);
+    expect(ttImp.tree.paths.open[0].value).to.be.true;
+    expect(ttImp.tree.paths.open[1].value).to.be.true;
+    var imp2 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(=> (not (instance ?CLARK Human))(subclass Human Entity))'));
+    var ttImp2 = new tt.TruthTreeSent(imp2);
+    expect(ttImp2.tree.paths.open[0].value).to.be.false;
+    expect(ttImp2.tree.paths.open[1].value).to.be.true;
+    var imp3 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (=> (instance ?CLARK Human)(subclass Human Entity)))'));
+    var ttImp3 = new tt.TruthTreeSent(imp3);
+    expect(ttImp3.tree.paths.open[0].value).to.be.false;
+    expect(ttImp3.tree.paths.open[1].value).to.be.false;
+  });
+
+  it('should return a tree with a stepCount of 2 for knowledgebase inputs with a single equivalence sentence (atoms for expressions)', function() {
+    var equiv = jKif.Utility.knowledgeBase(jKif.Parser.parse('(<=> (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttEquiv = new tt.TruthTreeSent(equiv);
+    expect(ttEquiv.tree.stepCount).to.equal(2);
+  });
+
+  it('should return a tree with the correct open path truth values for equivalence sentences', function() {
+    var equiv = jKif.Utility.knowledgeBase(jKif.Parser.parse('(<=> (instance ?CLARK Human)(subclass Human Entity))'));
+    var ttEquiv = new tt.TruthTreeSent(equiv);
+    expect(ttEquiv.tree.paths.open[0].value).to.be.true;
+    expect(ttEquiv.tree.paths.open[1].value).to.be.true;
+    var equiv2 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(=> (not (instance ?CLARK Human))(subclass Human Entity))'));
+    var equiv2 = new tt.TruthTreeSent(equiv2);
+    expect(equiv2.tree.paths.open[0].value).to.be.false;
+    expect(equiv2.tree.paths.open[1].value).to.be.true;
+    var equiv3 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (<=> (instance ?CLARK Human)(subclass Human Entity)))'));
+    var ttEquiv3 = new tt.TruthTreeSent(equiv3);
+    expect(ttEquiv3.tree.paths.open[0].value).to.be.false;
+    expect(ttEquiv3.tree.paths.open[1].value).to.be.false;
+  });
+
 });
