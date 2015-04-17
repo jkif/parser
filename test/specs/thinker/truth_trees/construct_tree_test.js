@@ -13,28 +13,49 @@ describe('#constructTree helper method', function() {
       constructTreeReturn = ttSent.tree; // constructTree sets ttSent.tree
 
 
-  xit('should return an instance of an Object', function() {
+  it('should return an instance of an Object', function() {
     expect(constructTreeReturn).to.be.an.instanceof(Object);
   });
 
-  xit('should return an Object with trunk, paths, step count, and prop map', function() {
+  it('should return an Object with trunk, paths, step count, and prop map', function() {
     expect(constructTreeReturn).to.have.all.keys(['trunk', 'paths', 'stepCount', 'propMap']);
   });
 
-  xit('should return a tree with a stepCount of 0 for empty knowledgebase inputs', function() {
+  it('should return a tree with a stepCount of 0 for empty knowledgebase inputs', function() {
     expect(constructTreeReturn.stepCount).to.equal(0);
   });
 
-  xit('should return a tree with a stepCount of 1 for knowledgebase inputs with a single atomic sentence', function() {
+  it('should return a tree with a stepCount of 1 for knowledgebase inputs with a single atomic sentence', function() {
     var atomicKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(instance ?CLARK Human)'));
     var ttSentAtomic = new tt.TruthTreeSent(atomicKb);
-    expect(ttSentAtomic.stepCount).to.equal(1);
+    expect(ttSentAtomic.tree.stepCount).to.equal(1);
   });
 
-  xit('should return a tree with a stepCount of 2 for knowledgebase inputs with a single negation of an atomic sentence', function() {
+  it('should return a tree with a stepCount of 1 for knowledgebase inputs with a single negation of an atomic sentence', function() {
     var atomicNegationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (instance ?CLARK Human))'));
     var ttSentAtomicNegation = new tt.TruthTreeSent(atomicNegationKb);
-    expect(ttSentAtomicNegation.stepCount).to.equal(2);
+    expect(ttSentAtomicNegation.tree.stepCount).to.equal(1);
+  });
+
+  it('should return a tree with a stepCount of 1 for knowledgebase inputs with a single negation of a molecular negated sentence', function() {
+    var atomicNegationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (not (instance ?CLARK Human)))'));
+    var ttSentAtomicNegation = new tt.TruthTreeSent(atomicNegationKb);
+    expect(ttSentAtomicNegation.tree.stepCount).to.equal(1);
+  });
+
+  it('should return a tree with the correct open path truth values for nested negations', function() {
+    var nest1 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (instance ?CLARK Human))'));
+    var ttSentNest1 = new tt.TruthTreeSent(nest1);
+    expect(ttSentNest1.tree.paths.open[0].value).to.be.false;
+    var nest2 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (not (instance ?CLARK Human)))'));
+    var ttSentNest2 = new tt.TruthTreeSent(nest2);
+    expect(ttSentNest2.tree.paths.open[0].value).to.be.true;
+    var nest3 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (not (not (instance ?CLARK Human))))'));
+    var ttSentNest3 = new tt.TruthTreeSent(nest3);
+    expect(ttSentNest3.tree.paths.open[0].value).to.be.false;
+    var nest4 = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (not (not (not (instance ?CLARK Human)))))'));
+    var ttSentNest4 = new tt.TruthTreeSent(nest4);
+    expect(ttSentNest4.tree.paths.open[0].value).to.be.true;
   });
 
 });
