@@ -22,8 +22,8 @@ describe('#construct helper method', function() {
 
   it('should return an open stack with a single reduced node for a single atomic sentence knowledgeBase', function() {
     var atomicKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(instance ?CLARK Human)')),
-      ttSentAtomic = new tt.TruthTreeSent(atomicKb),
-      openStack = ttSentAtomic.openStacks[0];
+        ttSentAtomic = new tt.TruthTreeSent(atomicKb),
+        openStack = ttSentAtomic.openStacks[0];
     expect(openStack).to.exist;
     expect(openStack).to.have.length(1);
     expect(openStack[0].checked).to.be.true;
@@ -32,9 +32,9 @@ describe('#construct helper method', function() {
 
 
   it('should return an open stack with two nodes for a single negated atomic sentence knowledgeBase', function() {
-      var atomicNegationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (instance ?CLARK Human))')),
-      ttSentAtomicNegation = new tt.TruthTreeSent(atomicNegationKb),
-      openStack = ttSentAtomicNegation.openStacks[0];
+    var atomicNegationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (instance ?CLARK Human))')),
+        ttSentAtomicNegation = new tt.TruthTreeSent(atomicNegationKb),
+        openStack = ttSentAtomicNegation.openStacks[0];
     expect(openStack).to.exist;
     expect(openStack).to.have.length(2);
     expect(openStack[0].checked).to.be.true;
@@ -42,25 +42,45 @@ describe('#construct helper method', function() {
     expect(openStack[0]._id).to.equal('negation');
     expect(openStack[1].checked).to.be.true;
     expect(openStack[1]._id).to.be.a('number');
-    expect(openStack[1]._id).to.equal(1);
+    expect(openStack[1]._id).to.equal(2);
   });
 
   it('should return a closed stack with three nodes for a two-sentence contradiction knowledgeBase', function() {
-      var contradictionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(instance ?CLARK Human)(not (instance ?CLARK Human))')),
-      ttSentContradiction = new tt.TruthTreeSent(contradictionKb);
-      closedStack = ttSentContradiction.closedStacks[0];
+    var contradictionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(instance ?CLARK Human)(not (instance ?CLARK Human))')),
+        ttSentContradiction = new tt.TruthTreeSent(contradictionKb);
+        closedStack = ttSentContradiction.closedStacks[0];
     expect(closedStack).to.exist;
     expect(Object.keys(ttSentContradiction.openStacks)).to.be.empty;
     expect(closedStack).to.have.length(3);
     expect(closedStack[0].checked).to.be.true;
     expect(closedStack[0]._id).to.be.a('number');
-    expect(closedStack[0]._id).to.equal(1);
+    expect(closedStack[0]._id).to.equal(3);
     expect(closedStack[1].checked).to.be.true;
     expect(closedStack[1]._id).to.be.a('string');
     expect(closedStack[1]._id).to.equal('negation');
     expect(closedStack[2].checked).to.be.true;
     expect(closedStack[2]._id).to.be.a('number');
-    expect(closedStack[2]._id).to.equal(-1);
+    expect(closedStack[2]._id).to.equal(-3);
   });
+
+  // @TODO: Add support for nested complex sentences (recurse on non-atomic sentences)
+
+  it('should return an open stack with three reduced nodes for a single conjunction of consistent atomic sentences in a knowledgeBase', function() {
+    var simpleConjunctionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(and (instance ?CLARK Human)(isSexy ?CLARK))')),
+        ttSentSimpleConjunction = new tt.TruthTreeSent(simpleConjunctionKb),
+        openStack = ttSentSimpleConjunction.openStacks[0];
+    expect(openStack).to.exist;
+    expect(openStack).to.have.length(3);
+    expect(openStack[0].checked).to.be.true;
+    expect(openStack[0]._id).to.equal('molecule');
+    expect(openStack[1].checked).to.be.true;
+    expect(openStack[1]._id).to.be.a('number');
+    expect(openStack[1]._id).to.equal(5);
+    expect(openStack[2].checked).to.be.true;
+    expect(openStack[2]._id).to.be.a('number');
+    expect(openStack[2]._id).to.equal(6);
+  });
+
+
 
 });
