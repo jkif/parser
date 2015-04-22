@@ -54,13 +54,13 @@ describe('#construct helper method', function() {
     expect(closedStack).to.have.length(3);
     expect(closedStack[0].checked).to.be.true;
     expect(closedStack[0]._id).to.be.a('number');
-    expect(closedStack[0]._id).to.equal(3);
+    expect(closedStack[0]._id).to.equal(1);
     expect(closedStack[1].checked).to.be.true;
     expect(closedStack[1]._id).to.be.a('string');
     expect(closedStack[1]._id).to.equal('negation');
     expect(closedStack[2].checked).to.be.true;
     expect(closedStack[2]._id).to.be.a('number');
-    expect(closedStack[2]._id).to.equal(-3);
+    expect(closedStack[2]._id).to.equal(-1);
   });
 
   // @TODO: Add support for nested complex sentences (recurse on non-atomic sentences)
@@ -75,12 +75,27 @@ describe('#construct helper method', function() {
     expect(openStack[0]._id).to.equal('molecule');
     expect(openStack[1].checked).to.be.true;
     expect(openStack[1]._id).to.be.a('number');
-    expect(openStack[1]._id).to.equal(5);
+    expect(openStack[1]._id).to.equal(2);
     expect(openStack[2].checked).to.be.true;
     expect(openStack[2]._id).to.be.a('number');
-    expect(openStack[2]._id).to.equal(6);
+    expect(openStack[2]._id).to.equal(3);
   });
 
+  it('should return an two open stacks with one reduced node in each stack for a single disjunction of consistent atomic sentences', function() {
+    var simpleDisjunctionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(or (isDead ?CLARK)(isSexy ?CLARK))')),
+        ttSentSimpleDisjunction = new tt.TruthTreeSent(simpleDisjunctionKb),
+        openStacks = ttSentSimpleDisjunction.openStacks;
+    expect(openStacks).to.exist;
+    expect(Object.keys(openStacks)).to.have.length(2);
+    expect(openStacks[0][0].checked).to.be.true;
+    expect(openStacks[0][0]._id).to.equal('molecule');
+    expect(openStacks[0][1].checked).to.be.true;
+    expect(openStacks[0][1]._id).to.equal(2);
+    expect(openStacks[1][0].checked).to.be.true;
+    expect(openStacks[1][0]._id).to.equal('molecule');
+    expect(openStacks[1][1].checked).to.be.true;
+    expect(openStacks[1][1]._id).to.equal(3);
+  });
 
 
 });
