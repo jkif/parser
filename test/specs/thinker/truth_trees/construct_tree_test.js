@@ -114,4 +114,25 @@ describe('#construct helper method', function() {
     expect(openStacks[1][1]._id).to.equal(3);
   });
 
+  it('should return two open stacks with three reduced nodes in each stack for an equivalence (simple atomic)', function() {
+    var simpleEquivalenceKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(<=> (isAlive ?CLARK)(isSexy ?CLARK))')),
+        ttSentSimpleEquivalence = new tt.TruthTreeSent(simpleEquivalenceKb),
+        openStacks = ttSentSimpleEquivalence.openStacks;
+    expect(openStacks).to.exist;
+    expect(Object.keys(openStacks)).to.have.length(2);
+    expect(Object.keys(ttSentSimpleEquivalence.closedStacks)).to.be.empty;
+    expect(openStacks[0][0].checked).to.be.true;
+    expect(openStacks[0][0]._id).to.equal('molecule');
+    expect(openStacks[0][1].checked).to.be.true;
+    expect(openStacks[0][1]._id).to.equal(2);
+    expect(openStacks[0][2].checked).to.be.true;
+    expect(openStacks[0][2]._id).to.equal(3);
+    expect(openStacks[1][0].checked).to.be.true;
+    expect(openStacks[1][0]._id).to.equal('molecule');
+    expect(openStacks[1][1].checked).to.be.true;
+    expect(openStacks[1][1]._id).to.equal(-2);
+    expect(openStacks[1][2].checked).to.be.true;
+    expect(openStacks[1][2]._id).to.equal(-3);
+  });
+
 });
