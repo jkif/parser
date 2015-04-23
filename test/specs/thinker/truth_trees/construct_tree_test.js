@@ -81,7 +81,7 @@ describe('#construct helper method', function() {
     expect(openStack[2]._id).to.equal(3);
   });
 
-  it('should return an two open stacks with one reduced node in each stack for a single disjunction of consistent atomic sentences', function() {
+  it('should return two open stacks with one reduced node in each stack for a single disjunction of consistent atomic sentences', function() {
     var simpleDisjunctionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(or (isDead ?CLARK)(isSexy ?CLARK))')),
         ttSentSimpleDisjunction = new tt.TruthTreeSent(simpleDisjunctionKb),
         openStacks = ttSentSimpleDisjunction.openStacks;
@@ -97,5 +97,21 @@ describe('#construct helper method', function() {
     expect(openStacks[1][1]._id).to.equal(3);
   });
 
+  it('should return two open stacks with one reduced node in each stack for an implication (simple atomic)', function() {
+    var simpleImplicationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(=> (isAlive ?CLARK)(isSexy ?CLARK))')),
+        ttSentSimpleImplication = new tt.TruthTreeSent(simpleImplicationKb),
+        openStacks = ttSentSimpleImplication.openStacks;
+    expect(openStacks).to.exist;
+    expect(Object.keys(openStacks)).to.have.length(2);
+    expect(Object.keys(ttSentSimpleImplication.closedStacks)).to.be.empty;
+    expect(openStacks[0][0].checked).to.be.true;
+    expect(openStacks[0][0]._id).to.equal('molecule');
+    expect(openStacks[0][1].checked).to.be.true;
+    expect(openStacks[0][1]._id).to.equal(-2);
+    expect(openStacks[1][0].checked).to.be.true;
+    expect(openStacks[1][0]._id).to.equal('molecule');
+    expect(openStacks[1][1].checked).to.be.true;
+    expect(openStacks[1][1]._id).to.equal(3);
+  });
 
 });
