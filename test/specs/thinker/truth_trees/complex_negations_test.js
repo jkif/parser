@@ -7,7 +7,7 @@ var chai = require('chai'),
 
 describe('#construct with complex negations', function() {
 
-  xit('should return one open stack with 4 nodes for a negated disjunction of atoms', function() {
+  it('should return one open stack with 4 nodes for a negated disjunction of atoms', function() {
     var negatedDisjunctionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (or (instance ?CLARK Alien)(isStupid ?CLARK)))')),
         ttSentNegatedDisjunction = new tt.TruthTreeSent(negatedDisjunctionKb),
         openStack = ttSentNegatedDisjunction.openStacks[0];

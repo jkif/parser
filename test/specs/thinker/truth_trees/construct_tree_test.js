@@ -42,7 +42,7 @@ describe('#construct helper method', function() {
     expect(openStack[0]._id).to.equal('negation');
     expect(openStack[1].checked).to.be.true;
     expect(openStack[1]._id).to.be.a('number');
-    expect(openStack[1]._id).to.equal(2);
+    expect(openStack[1]._id).to.equal(-2);
   });
 
   it('should return a closed stack with three nodes for a two-sentence contradiction knowledgeBase', function() {
