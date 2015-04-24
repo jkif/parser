@@ -28,7 +28,7 @@ describe('#construct with complex negations', function() {
     expect(openStack[3]._id).to.equal(-4);
   });
 
-  xit('should return two open stacks with 3 nodes in each stack for a negated conjunction of atoms', function() {
+  it('should return two open stacks with 3 nodes in each stack for a negated conjunction of atoms', function() {
     var negatedDisjunctionKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (and (instance ?CLARK Human)(isStupid ?CLARK)))')),
         ttSentNegatedDisjunction = new tt.TruthTreeSent(negatedDisjunctionKb),
         openStacks = ttSentNegatedDisjunction.openStacks,
