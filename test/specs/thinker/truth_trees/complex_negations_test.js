@@ -60,7 +60,7 @@ describe('#construct with complex negations', function() {
     expect(secondStack[2]._id).to.equal(-4);
   });
 
-  xit('should return one open stack with 4 nodes in the stack for a negated implication (atoms)', function() {
+  it('should return one open stack with 4 nodes in the stack for a negated implication (atoms)', function() {
     var negatedImplicationKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (=> (instance ?CLARK Human)(isStupid ?CLARK)))')),
         ttSentNegatedImplication = new tt.TruthTreeSent(negatedImplicationKb),
         openStack = ttSentNegatedImplication.openStacks[0];
