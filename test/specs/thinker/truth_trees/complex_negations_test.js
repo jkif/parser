@@ -81,7 +81,7 @@ describe('#construct with complex negations', function() {
     expect(openStack[3]._id).to.equal(-4);
   });
 
-  xit('should return two open stacks with four nodes in each stack for a negated equivalence (simple atomic)', function() {
+  it('should return two open stacks with four nodes in each stack for a negated equivalence (simple atomic)', function() {
     var negatedEquivalenceKb = jKif.Utility.knowledgeBase(jKif.Parser.parse('(not (<=> (isAlive ?CLARK)(isUgly ?CLARK)))')),
         ttSentNegatedEquivalence = new tt.TruthTreeSent(negatedEquivalenceKb),
         openStacks = ttSentNegatedEquivalence.openStacks;
