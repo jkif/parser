@@ -1,4 +1,4 @@
-# Contributing to jKif
+# Contributing to jKif Parser
 
 ## General Workflow
 

@@ -24,9 +24,3 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
-
-# Webstorm IDE
-.idea
-
-# Marketing Site Build
-_site/

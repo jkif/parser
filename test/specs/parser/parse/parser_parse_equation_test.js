@@ -1,18 +1,18 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../../../../lib/jkif'),
+    Parser = require('../../../../lib/jkif_parser'),
     ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
-describe('jKif.Parser.parse Equation parsing', function() {
+describe('Parser.parse Equation parsing', function() {
 
   it('correctly parses an Equation into an EquationNode', function() {
-    var parsed = jKif.Parser.parse('(= id id)').expressions[0];
+    var parsed = Parser.parse('(= id id)').expressions[0];
     expect(parsed).to.be.an.instanceof(ast.EquationNode);
   });
 
   it('correctly parses the terms of an Equation if both Words', function() {
-    var parsed = jKif.Parser.parse('(= firstTerm secondTerm)').expressions[0];
+    var parsed = Parser.parse('(= firstTerm secondTerm)').expressions[0];
     expect(parsed.terms).to.have.length(2);
     expect(parsed.terms[0]).to.be.an.instanceof(ast.WordNode);
     expect(parsed.terms[1]).to.be.an.instanceof(ast.WordNode);
@@ -21,7 +21,7 @@ describe('jKif.Parser.parse Equation parsing', function() {
   });
 
   it('correctly parses the terms of an Equation if both Variables', function() {
-    var parsed = jKif.Parser.parse('(= ?FIRSTTERM ?SECONDTERM)').expressions[0];
+    var parsed = Parser.parse('(= ?FIRSTTERM ?SECONDTERM)').expressions[0];
     expect(parsed.terms).to.have.length(2);
     expect(parsed.terms[0]).to.be.an.instanceof(ast.VariableNode);
     expect(parsed.terms[1]).to.be.an.instanceof(ast.VariableNode);
@@ -32,7 +32,7 @@ describe('jKif.Parser.parse Equation parsing', function() {
   });
 
   it('correctly parses the terms of an Equation with a FunctionTerm', function() {
-    var parsed = jKif.Parser.parse('(= firstTerm (function argument))').expressions[0];
+    var parsed = Parser.parse('(= firstTerm (function argument))').expressions[0];
     expect(parsed.terms).to.have.length(2);
     expect(parsed.terms[0]).to.be.an.instanceof(ast.WordNode);
     expect(parsed.terms[1]).to.be.an.instanceof(ast.RelSentNode);
@@ -42,7 +42,7 @@ describe('jKif.Parser.parse Equation parsing', function() {
   });
 
   it('correctly parses higher-order Equations', function() {
-    var parsed = jKif.Parser.parse('(= firstTerm (= secondFirstTerm firstSecondTerm))').expressions[0];
+    var parsed = Parser.parse('(= firstTerm (= secondFirstTerm firstSecondTerm))').expressions[0];
     expect(parsed.terms).to.have.length(2);
     expect(parsed.terms[0]).to.be.an.instanceof(ast.WordNode);
     expect(parsed.terms[1]).to.be.an.instanceof(ast.EquationNode);
