@@ -1,9 +1,16 @@
 {
-  "name": "jkif",
+  "name": "jkif-parser",
   "version": "0.0.1",
-  "description": "Complete SUO-KIF to JavaScript parser and a JavaScript API for querying and manipulating SUO-KIF, and an integrated tool-set for machine inference over SUO-KIF via JavaScript libraries",
+  "description": "Complete SUO-KIF to JavaScript parser",
   "author": "Clark Feusier <cfeusier@gmail.com>",
-  "repository": "https://github.com/Cfeusier/jkif",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkif/parser"
+  },
+  "bugs": {
+    "url": "https://github.com/jkif/parser/issues"
+  },
+  "license": "MIT",
   "keywords": [
     "jKif",
     "KIF",
@@ -11,18 +18,17 @@
     "JavaScript",
     "Ontology",
     "Semantics",
-    "Logic"
+    "Logic",
+    "Parser"
   ],
-  "license": "MIT",
-  "main": "lib/jkif.js",
+  "main": "lib/jkif_parser.js",
   "scripts": {
     "test": "for f in test/specs/**/*; do echo \"$f\"; mocha \"$f\"; done; exit 0"
   },
   "dependencies": {
     "bluebird": "^2.9.24",
     "jison": "^0.4.15",
-    "jsonfile": "^2.0.0",
-    "ramda": "^0.13.0"
+    "jsonfile": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^2.2.0",

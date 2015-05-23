@@ -1,13 +1,13 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../../../../lib/jkif'),
+    Parser = require('../../../../lib/jkif_parser'),
     ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
-describe('jKif.Parser.parse Equivalence sentence parsing', function() {
+describe('Parser.parse Equivalence sentence parsing', function() {
 
   it('correctly parses an equivalence into an EquivalenceNode', function () {
-    var parsed = jKif.Parser.parse('(<=> expr1 expr2)').expressions[0];
+    var parsed = Parser.parse('(<=> expr1 expr2)').expressions[0];
     expect(parsed).to.be.an.instanceof(ast.EquivalenceNode);
     expect(parsed.expressions).to.be.an.instanceof(Array);
     expect(parsed.expressions).to.have.length(2);

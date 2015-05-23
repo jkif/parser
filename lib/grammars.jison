@@ -1,5 +1,5 @@
 /**
- * jKif - 2015
+ * jKif Parser - 2015
  * grammars.jison
  * @file Language Grammars for SUO-KIF via JavaScript, Flex, and Jison
  * @author Clark Feusier - cfeusier@gmail.com

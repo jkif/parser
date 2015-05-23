@@ -2,13 +2,13 @@ var chai = require('chai'),
     expect = chai.expect,
     fs = require('fs'),
     path = require('path'),
-    jKif = require('../../../../lib/jkif'),
+    Parser = require('../../../../lib/jkif_parser'),
     ast = require('../../../../lib/ast_constructors/ast_constructors'),
     kifFile = fs.readFileSync(path.resolve(__dirname + './../../../resources/sumo_core.kif'), 'utf8'),
-    parsed = jKif.Parser.parse(kifFile);
+    parsed = Parser.parse(kifFile);
 
 
-describe('jKif SUMO KIF File Parser', function() {
+describe('Parser SUMO KIF File Parser', function() {
 
   it('should parse a SUMO .kif file into a KIFNode', function() {
     expect(parsed).to.be.an.instanceof(ast.KIFNode);

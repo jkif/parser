@@ -1,12 +1,12 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../../../../lib/jkif'),
+    Parser = require('../../../../lib/jkif_parser'),
     ast = require('../../../../lib/ast_constructors/ast_constructors'),
     locKeys = ['first_line', 'first_column', 'last_line', 'last_column'],
-    parsed = jKif.Parser.parse('(exists (?F) (instance ?F Farmer))');
+    parsed = Parser.parse('(exists (?F) (instance ?F Farmer))');
 
 
-describe('jKif.Parser.parse Location Data', function() {
+describe('Parser.parse Location Data', function() {
 
   it('should include location data in the parsed result', function() {
     expect(parsed.locationData).to.be.an.instanceof(Object);

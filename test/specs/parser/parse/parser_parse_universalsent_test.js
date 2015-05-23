@@ -1,13 +1,13 @@
 var chai = require('chai'),
     expect = chai.expect,
-    jKif = require('../../../../lib/jkif'),
+    Parser = require('../../../../lib/jkif_parser'),
     ast = require('../../../../lib/ast_constructors/ast_constructors');
 
 
-describe('jKif.Parser.parse Universally-quantified sentence parsing', function() {
+describe('Parser.parse Universally-quantified sentence parsing', function() {
 
   it('correctly parses a universally-quantified sentence into a UniversalSentNode', function () {
-    var parsed = jKif.Parser.parse('(forall (?variable) expr)').expressions[0];
+    var parsed = Parser.parse('(forall (?variable) expr)').expressions[0];
     expect(parsed).to.be.an.instanceof(ast.UniversalSentNode);
     expect(parsed.variableList).to.be.an.instanceof(Array);
     expect(parsed.variableList).to.have.length(1);
