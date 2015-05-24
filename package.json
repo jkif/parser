@@ -1,6 +1,6 @@
 {
   "name": "jkif-parser",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Complete SUO-KIF to JavaScript parser",
   "author": "Clark Feusier <cfeusier@gmail.com>",
   "repository": {
